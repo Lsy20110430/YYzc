@@ -311,9 +311,44 @@
         #monitorPanel {
             display: block !important;
         }
+
+        /* 访问拒绝遮罩 */
+        .access-denied-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            flex-direction: column;
+            padding: 2rem;
+            text-align: center;
+        }
+        .access-denied-overlay h2 {
+            color: #ff6b6b;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .access-denied-overlay p {
+            color: #eae6f2;
+            font-size: 1rem;
+            max-width: 400px;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
+
+<!-- 访问拒绝遮罩（默认隐藏，由JS控制） -->
+<div id="accessDeniedOverlay" class="access-denied-overlay" style="display:none;">
+    <h2>🚫 访问受限</h2>
+    <p>此页面仅接受来自 <strong>https://yy-verify.netlify.app/</strong> 的跳转访问，请通过正确入口进入。</p>
+</div>
 
 <div class="notice-modal" id="globalNoticeModal">
     <div class="notice-content">
@@ -323,7 +358,7 @@
     </div>
 </div>
 
-<div class="cute-container">
+<div class="cute-container" id="mainContent">
     <!-- 品牌头 + 公益专区 (无密码验证，直接展示) -->
     <div class="glass-block" style="text-align: center;">
         <h1 style="font-size: 2.3rem; color:#ff8aae; text-shadow: 0 2px 8px #ff8aae80;">韵殷支持！只做公益</h1>
@@ -426,6 +461,29 @@
 </div>
 
 <script>
+    // ========= 来源校验：仅允许来自 https://yy-verify.netlify.app/ 的跳转 =========
+    (function() {
+        const ALLOWED_REFERER = 'https://yy-verify.netlify.app/';
+        const denyOverlay = document.getElementById('accessDeniedOverlay');
+        const mainContent = document.getElementById('mainContent');
+
+        // 检查 referrer
+        const referrer = document.referrer || '';
+
+        // 如果 referrer 为空（直接访问）或者不是以允许的地址开头，则拒绝访问
+        if (!referrer || !referrer.startsWith(ALLOWED_REFERER)) {
+            // 显示拒绝遮罩，隐藏主内容
+            denyOverlay.style.display = 'flex';
+            mainContent.style.display = 'none';
+            return;
+        }
+
+        // 验证通过，显示主内容
+        denyOverlay.style.display = 'none';
+        mainContent.style.display = 'block';
+    })();
+
+    // ========= 原有功能 =========
     // 关闭公告
     document.getElementById('closeGlobalNotice')?.addEventListener('click', () => {
         const modal = document.getElementById('globalNoticeModal');
@@ -498,9 +556,6 @@
     window.addEventListener('beforeunload', () => {
         if(autoRefreshTimer) clearInterval(autoRefreshTimer);
     });
-
-    // ========= 端口服务已完全移除 =========
-    // 浮雾端口区块及相关JS已全部删除，CSS也已隐藏所有相关元素
 </script>
 
 </body>
