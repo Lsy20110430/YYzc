@@ -276,7 +276,6 @@
         </div>
     </div>
 
-    <!-- 规则与处罚 -->
     <div class="glass-block">
         <div class="section-title">📜 用户守则</div>
         <ul class="rule-list">
@@ -298,28 +297,24 @@
 </div>
 
 <script>
-    // ========= 来源校验：仅允许从主菜单（index.html）跳转访问 =========
+    // ============================================================
+    // 访问控制：检查 sessionStorage 中的授权变量
+    // ============================================================
     (function() {
         const denyOverlay = document.getElementById('accessDeniedOverlay');
         const mainContent = document.getElementById('mainContent');
 
         if (!denyOverlay || !mainContent) return;
 
-        const referrer = document.referrer || '';
+        const isAuthorized = sessionStorage.getItem('yunyao_authorized') === 'true';
 
-        // 允许来自 index.html 的跳转
-        const isFromIndex = referrer.includes('/index.html') ||
-                            referrer.endsWith('/') ||
-                            referrer.includes('index.html');
-
-        if (!referrer || !isFromIndex) {
+        if (isAuthorized) {
+            denyOverlay.style.display = 'none';
+            mainContent.style.display = 'block';
+        } else {
             denyOverlay.style.display = 'flex';
             mainContent.style.display = 'none';
-            return;
         }
-
-        denyOverlay.style.display = 'none';
-        mainContent.style.display = 'block';
     })();
 </script>
 
