@@ -23,7 +23,39 @@
             min-height: 100vh;
         }
 
-        .container {
+        .access-denied-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            flex-direction: column;
+            padding: 2rem;
+            text-align: center;
+        }
+        .access-denied-overlay h2 {
+            color: #ff6b6b;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .access-denied-overlay p {
+            color: #eae6f2;
+            font-size: 1rem;
+            max-width: 400px;
+            opacity: 0.8;
+        }
+        .access-denied-overlay .denied-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        #mainContent {
+            display: block;
             max-width: 900px;
             margin: 0 auto;
             padding: 0 20px;
@@ -185,12 +217,21 @@
         @media (max-width: 640px) {
             .glass-block { padding: 1.5rem; }
             .section-title { font-size: 1.4rem; }
+            #mainContent { padding: 0 12px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+<!-- ===== 访问拒绝遮罩 ===== -->
+<div id="accessDeniedOverlay" class="access-denied-overlay">
+    <div class="denied-icon">🚫</div>
+    <h2>访问受限</h2>
+    <p>请通过 <strong>韵殷主菜单</strong> 进入此页面，<br>直接访问是不被允许的哦～</p>
+</div>
+
+<!-- ===== 主内容 ===== -->
+<div id="mainContent">
     <div class="glass-block">
         <div class="back-bar">
             <a href="index.html" class="back-btn">← 返回菜单</a>
@@ -255,6 +296,32 @@
 
     <div class="footer">© 2026 韵殷官方 · 联系方式: ruinwisp@outlook.com</div>
 </div>
+
+<script>
+    // ========= 来源校验：仅允许从主菜单（index.html）跳转访问 =========
+    (function() {
+        const denyOverlay = document.getElementById('accessDeniedOverlay');
+        const mainContent = document.getElementById('mainContent');
+
+        if (!denyOverlay || !mainContent) return;
+
+        const referrer = document.referrer || '';
+
+        // 允许来自 index.html 的跳转
+        const isFromIndex = referrer.includes('/index.html') ||
+                            referrer.endsWith('/') ||
+                            referrer.includes('index.html');
+
+        if (!referrer || !isFromIndex) {
+            denyOverlay.style.display = 'flex';
+            mainContent.style.display = 'none';
+            return;
+        }
+
+        denyOverlay.style.display = 'none';
+        mainContent.style.display = 'block';
+    })();
+</script>
 
 </body>
 </html>

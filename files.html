@@ -23,7 +23,39 @@
             min-height: 100vh;
         }
 
-        .container {
+        .access-denied-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            flex-direction: column;
+            padding: 2rem;
+            text-align: center;
+        }
+        .access-denied-overlay h2 {
+            color: #ff6b6b;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .access-denied-overlay p {
+            color: #eae6f2;
+            font-size: 1rem;
+            max-width: 400px;
+            opacity: 0.8;
+        }
+        .access-denied-overlay .denied-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        #mainContent {
+            display: block;
             max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
@@ -80,7 +112,6 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
-        /* 搜索框 */
         .search-wrapper {
             margin-bottom: 1.2rem;
             display: flex;
@@ -153,7 +184,6 @@
             white-space: nowrap;
         }
 
-        /* 文件列表 */
         .file-list {
             display: flex;
             flex-direction: column;
@@ -221,7 +251,6 @@
             color: #8a7e9e;
         }
 
-        /* 分页器 */
         .pagination {
             display: flex;
             justify-content: center;
@@ -293,12 +322,21 @@
             .search-wrapper { flex-direction: column; align-items: stretch; }
             .search-hint { text-align: center; font-size: 12px; }
             .back-bar { gap: 0.5rem; }
+            #mainContent { padding: 0 12px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+<!-- ===== 访问拒绝遮罩 ===== -->
+<div id="accessDeniedOverlay" class="access-denied-overlay">
+    <div class="denied-icon">🚫</div>
+    <h2>访问受限</h2>
+    <p>请通过 <strong>韵殷主菜单</strong> 进入此页面，<br>直接访问是不被允许的哦～</p>
+</div>
+
+<!-- ===== 主内容 ===== -->
+<div id="mainContent">
     <div class="glass-block">
         <div class="back-bar">
             <a href="index.html" class="back-btn">← 返回菜单</a>
@@ -306,7 +344,6 @@
             <span style="margin-left:auto; font-size:0.7rem; color:#8a7e9e;" id="fileCount">加载中...</span>
         </div>
 
-        <!-- 搜索框 -->
         <div class="search-wrapper">
             <div class="search-box">
                 <span class="search-icon">🔍</span>
@@ -316,12 +353,10 @@
             <span class="search-hint" id="searchHint">共 <span id="totalCount">0</span> 个文件</span>
         </div>
 
-        <!-- 文件列表 -->
         <div class="file-list" id="fileList">
             <div class="empty">⏳ 加载中...</div>
         </div>
 
-        <!-- 分页器 -->
         <div class="pagination" id="pagination"></div>
 
         <div class="footer">所有链接均为永久有效 · 公益分享</div>
@@ -329,14 +364,36 @@
 </div>
 
 <script>
-    // ===== 配置 =====
+    // ========= 来源校验：仅允许从主菜单（index.html）跳转访问 =========
+    (function() {
+        const denyOverlay = document.getElementById('accessDeniedOverlay');
+        const mainContent = document.getElementById('mainContent');
+
+        if (!denyOverlay || !mainContent) return;
+
+        const referrer = document.referrer || '';
+
+        const isFromIndex = referrer.includes('/index.html') ||
+                            referrer.endsWith('/') ||
+                            referrer.includes('index.html');
+
+        if (!referrer || !isFromIndex) {
+            denyOverlay.style.display = 'flex';
+            mainContent.style.display = 'none';
+            return;
+        }
+
+        denyOverlay.style.display = 'none';
+        mainContent.style.display = 'block';
+    })();
+
+    // ===== 文件列表功能 =====
     const PER_PAGE = 20;
     let allFiles = [];
     let filteredFiles = [];
     let currentPage = 1;
     let searchKeyword = '';
 
-    // ===== DOM 引用 =====
     const fileList = document.getElementById('fileList');
     const pagination = document.getElementById('pagination');
     const searchInput = document.getElementById('searchInput');
@@ -344,18 +401,14 @@
     const totalCountSpan = document.getElementById('totalCount');
     const fileCountSpan = document.getElementById('fileCount');
 
-    // ===== 加载数据 =====
     async function loadFiles() {
         try {
-            // 尝试加载数据，如果文件不存在则使用示例数据
             let response = await fetch('data/files.json?t=' + Date.now());
             if (!response.ok) {
-                // 如果文件不存在，使用内嵌示例数据
                 throw new Error('使用示例数据');
             }
             allFiles = await response.json();
         } catch (e) {
-            // 示例数据（方便演示）
             allFiles = [
                 { name: '韵殷功能包.zip', url: 'https://wwbkl.lanzouu.com/i4VOK3fsdo7g', size: '15 MB', date: '2026-07-20' },
                 { name: '韵殷养成游戏.apk', url: 'https://wwbkl.lanzouu.com/iou0X3fsegmj', size: '8 MB', date: '2026-07-19' },
@@ -382,14 +435,12 @@
             ];
         }
 
-        // 按日期倒序排序
         allFiles.sort((a, b) => new Date(b.date) - new Date(a.date));
         filteredFiles = allFiles;
         updateStats();
         renderPage(1);
     }
 
-    // ===== 搜索处理 =====
     function handleSearch() {
         const keyword = searchInput.value.trim().toLowerCase();
         searchKeyword = keyword;
@@ -407,24 +458,19 @@
         renderPage(1);
     }
 
-    // ===== 更新统计 =====
     function updateStats() {
         const total = filteredFiles.length;
         totalCountSpan.textContent = total;
         fileCountSpan.textContent = `共 ${total} 个文件${searchKeyword ? ' · 已筛选' : ''}`;
-
-        // 显示/隐藏清空按钮
         clearSearchBtn.style.display = searchInput.value.trim() ? 'block' : 'none';
     }
 
-    // ===== 高亮文本 =====
     function highlightText(text, keyword) {
         if (!keyword) return text;
         const regex = new RegExp(`(${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
         return text.replace(regex, '<mark class="highlight">$1</mark>');
     }
 
-    // ===== 渲染页面 =====
     function renderPage(page) {
         const total = filteredFiles.length;
         const totalPages = Math.ceil(total / PER_PAGE) || 1;
@@ -437,7 +483,6 @@
         const end = Math.min(start + PER_PAGE, total);
         const pageData = filteredFiles.slice(start, end);
 
-        // 渲染列表
         if (pageData.length === 0) {
             fileList.innerHTML = `
                 <div class="empty">
@@ -456,11 +501,9 @@
             `).join('');
         }
 
-        // 渲染分页器
         renderPagination(total, totalPages);
     }
 
-    // ===== 渲染分页器 =====
     function renderPagination(total, totalPages) {
         if (totalPages <= 1) {
             pagination.innerHTML = '';
@@ -494,7 +537,6 @@
 
         pagination.innerHTML = html;
 
-        // 绑定事件
         pagination.querySelectorAll('.page-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 if (this.disabled) return;
@@ -516,22 +558,18 @@
         fileList.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // ===== 事件绑定 =====
-    // 搜索输入（防抖）
     let searchTimeout;
     searchInput.addEventListener('input', function() {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(handleSearch, 300);
     });
 
-    // 清空搜索
     clearSearchBtn.addEventListener('click', function() {
         searchInput.value = '';
         searchInput.focus();
         handleSearch();
     });
 
-    // 键盘快捷键：ESC 清空搜索
     searchInput.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             searchInput.value = '';
@@ -540,7 +578,6 @@
         }
     });
 
-    // ===== 启动 =====
     loadFiles();
 </script>
 
