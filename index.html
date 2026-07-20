@@ -187,7 +187,9 @@
 </div>
 
 <script>
-    // ========= 来源校验：仅允许来自 https://yy-verify.netlify.app/ 的跳转 =========
+    // ========= 来源校验：接受两种来源 =========
+    // 1. 来自 https://yy-verify.netlify.app/（原始入口）
+    // 2. 来自本站子页面（返回菜单时 referrer 是 info.html / monitor.html / files.html）
     (function() {
         const ALLOWED_REFERER = 'https://yy-verify.netlify.app/';
         const denyOverlay = document.getElementById('accessDeniedOverlay');
@@ -197,12 +199,22 @@
 
         const referrer = document.referrer || '';
 
-        if (!referrer || !referrer.startsWith(ALLOWED_REFERER)) {
+        // 允许的来源列表
+        const isFromAllowed = 
+            referrer.startsWith(ALLOWED_REFERER) ||                           // 来自 yy-verify
+            referrer.includes('/info.html') ||                                // 来自官网信息
+            referrer.includes('/monitor.html') ||                             // 来自服务器检测
+            referrer.includes('/files.html') ||                               // 来自文件列表
+            referrer.endsWith('/');                                           // 来自同域根目录
+
+        // 如果 referrer 为空（直接访问）或不在允许列表中，则拒绝
+        if (!referrer || !isFromAllowed) {
             denyOverlay.style.display = 'flex';
             mainContent.style.display = 'none';
             return;
         }
 
+        // 验证通过，显示主内容
         denyOverlay.style.display = 'none';
         mainContent.style.display = 'block';
     })();
