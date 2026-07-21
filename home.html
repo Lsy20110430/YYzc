@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>韵殷 · 功能菜单</title>
     <style>
+        /* ... 样式保持不变 ... */
         * {
             margin: 0;
             padding: 0;
@@ -188,19 +189,30 @@
 
 <script>
     // ============================================================
-    // 访问控制：检查 sessionStorage 中的授权变量
-    // 未授权则跳转到 index.html（安全入口）
+    // 访问控制：localStorage + 时间戳（有效期 24 小时）
     // ============================================================
     (function() {
-        const isAuthorized = sessionStorage.getItem('yunyao_authorized') === 'true';
+        const AUTH_KEY = 'yunyao_authorized';
+        const TIME_KEY = 'yunyao_auth_time';
+        const EXPIRE_HOURS = 24;
+        const EXPIRE_MS = EXPIRE_HOURS * 60 * 60 * 1000;
 
-        if (!isAuthorized) {
-            // 未授权：跳转到安全入口
+        const isAuthorized = localStorage.getItem(AUTH_KEY) === 'true';
+        const authTime = parseInt(localStorage.getItem(TIME_KEY) || '0');
+        const isExpired = (Date.now() - authTime) > EXPIRE_MS;
+
+        // 如果未授权或已过期，跳转到登录页
+        if (!isAuthorized || isExpired) {
+            // 清除过期数据
+            if (isExpired) {
+                localStorage.removeItem(AUTH_KEY);
+                localStorage.removeItem(TIME_KEY);
+            }
             window.location.href = 'index.html';
             return;
         }
 
-        // 已授权：正常显示
+        // 授权有效，正常显示
         document.getElementById('accessDeniedOverlay').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
     })();

@@ -365,13 +365,23 @@
 
 <script>
     // ============================================================
-    // 访问控制：检查 sessionStorage 中的授权变量
-    // 未授权则跳转到 index.html（安全入口）
+    // 访问控制：localStorage + 时间戳（有效期 24 小时）
     // ============================================================
     (function() {
-        const isAuthorized = sessionStorage.getItem('yunyao_authorized') === 'true';
+        const AUTH_KEY = 'yunyao_authorized';
+        const TIME_KEY = 'yunyao_auth_time';
+        const EXPIRE_HOURS = 24;
+        const EXPIRE_MS = EXPIRE_HOURS * 60 * 60 * 1000;
 
-        if (!isAuthorized) {
+        const isAuthorized = localStorage.getItem(AUTH_KEY) === 'true';
+        const authTime = parseInt(localStorage.getItem(TIME_KEY) || '0');
+        const isExpired = (Date.now() - authTime) > EXPIRE_MS;
+
+        if (!isAuthorized || isExpired) {
+            if (isExpired) {
+                localStorage.removeItem(AUTH_KEY);
+                localStorage.removeItem(TIME_KEY);
+            }
             window.location.href = 'index.html';
             return;
         }

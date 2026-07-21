@@ -579,13 +579,23 @@
         return;
       }
 
-      // ===== 登录成功：设置授权变量 =====
-      sessionStorage.setItem('yunyao_authorized', 'true');
+      // ===== 登录成功：写入 localStorage（含时间戳） =====
+      try {
+        localStorage.setItem('yunyao_authorized', 'true');
+        localStorage.setItem('yunyao_auth_time', Date.now().toString());
+        // 确认写入成功
+        if (localStorage.getItem('yunyao_authorized') !== 'true') {
+          throw new Error('写入失败');
+        }
+      } catch (e) {
+        setMessage('存储失败，请重试', 'error');
+        return;
+      }
 
       setMessage('验证成功，正在跳转...', 'success');
       setTimeout(function() {
         window.location.href = REDIRECT_URL;
-      }, 1000);
+      }, 800);
     }
 
     captchaConfirmBtn.addEventListener('click', function() {
