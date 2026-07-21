@@ -271,14 +271,14 @@
 <div id="accessDeniedOverlay" class="access-denied-overlay">
     <div class="denied-icon">🚫</div>
     <h2>访问受限</h2>
-    <p>请通过 <strong>韵殷主菜单</strong> 进入此页面，<br>直接访问是不被允许的哦～</p>
+    <p>请通过 <strong>安全入口</strong> 验证后进入，<br>直接访问是不被允许的哦～</p>
 </div>
 
 <!-- ===== 主内容 ===== -->
 <div id="mainContent">
     <div class="glass-block">
         <div class="back-bar">
-            <a href="index.html" class="back-btn">← 返回菜单</a>
+            <a href="home.html" class="back-btn">← 返回菜单</a>
             <span style="color:#cdc2e6; font-size:0.9rem;">📡 服务器检测</span>
         </div>
 
@@ -331,22 +331,18 @@
 <script>
     // ============================================================
     // 访问控制：检查 sessionStorage 中的授权变量
+    // 未授权则跳转到 index.html（安全入口）
     // ============================================================
     (function() {
-        const denyOverlay = document.getElementById('accessDeniedOverlay');
-        const mainContent = document.getElementById('mainContent');
-
-        if (!denyOverlay || !mainContent) return;
-
         const isAuthorized = sessionStorage.getItem('yunyao_authorized') === 'true';
 
-        if (isAuthorized) {
-            denyOverlay.style.display = 'none';
-            mainContent.style.display = 'block';
-        } else {
-            denyOverlay.style.display = 'flex';
-            mainContent.style.display = 'none';
+        if (!isAuthorized) {
+            window.location.href = 'index.html';
+            return;
         }
+
+        document.getElementById('accessDeniedOverlay').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
     })();
 
     // ========= 网站状态监控模块 =========

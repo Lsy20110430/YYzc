@@ -332,14 +332,14 @@
 <div id="accessDeniedOverlay" class="access-denied-overlay">
     <div class="denied-icon">🚫</div>
     <h2>访问受限</h2>
-    <p>请通过 <strong>韵殷主菜单</strong> 进入此页面，<br>直接访问是不被允许的哦～</p>
+    <p>请通过 <strong>安全入口</strong> 验证后进入，<br>直接访问是不被允许的哦～</p>
 </div>
 
 <!-- ===== 主内容 ===== -->
 <div id="mainContent">
     <div class="glass-block">
         <div class="back-bar">
-            <a href="index.html" class="back-btn">← 返回菜单</a>
+            <a href="home.html" class="back-btn">← 返回菜单</a>
             <span style="color:#cdc2e6; font-size:0.9rem;">📂 文件分享</span>
             <span style="margin-left:auto; font-size:0.7rem; color:#8a7e9e;" id="fileCount">加载中...</span>
         </div>
@@ -365,37 +365,19 @@
 
 <script>
     // ============================================================
-    // 访问控制：双重校验（sessionStorage + referrer 兜底）
+    // 访问控制：检查 sessionStorage 中的授权变量
+    // 未授权则跳转到 index.html（安全入口）
     // ============================================================
     (function() {
-        const denyOverlay = document.getElementById('accessDeniedOverlay');
-        const mainContent = document.getElementById('mainContent');
-
-        if (!denyOverlay || !mainContent) return;
-
-        // 1. 检查 sessionStorage 变量
         const isAuthorized = sessionStorage.getItem('yunyao_authorized') === 'true';
 
-        // 2. 检查 referrer 是否来自本站（兜底方案）
-        const referrer = document.referrer || '';
-        const isFromLocal = referrer.includes(window.location.hostname) ||
-                            referrer.includes('/index.html') ||
-                            referrer.includes('/info.html') ||
-                            referrer.includes('/monitor.html') ||
-                            referrer.includes('/files.html');
-
-        // 任一条件满足即放行
-        if (isAuthorized || isFromLocal) {
-            // 如果是从本站跳转但变量没设，补设一下
-            if (!isAuthorized && isFromLocal) {
-                sessionStorage.setItem('yunyao_authorized', 'true');
-            }
-            denyOverlay.style.display = 'none';
-            mainContent.style.display = 'block';
-        } else {
-            denyOverlay.style.display = 'flex';
-            mainContent.style.display = 'none';
+        if (!isAuthorized) {
+            window.location.href = 'index.html';
+            return;
         }
+
+        document.getElementById('accessDeniedOverlay').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
     })();
 
     // ============================================================
@@ -425,7 +407,7 @@
             allFiles = [];
             fileList.innerHTML = `
                 <div class="empty">
-                    ⚠️ 数据文件加载失败，请联系管理员维护
+                    ⚠️ 数据文件加载失败，请确保 data/files.json 存在
                     <br><span style="font-size:0.8rem;color:#8a7e9e;">${e.message}</span>
                 </div>
             `;
