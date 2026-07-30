@@ -1,5 +1,17 @@
 [
     {
+        "name": "Termux",
+        "url": "https://yddown2.jb51.net/202101/tools/Termux_136073.apk?auth_key=1785431538-87769f653db9128a2f9b-0-21217d755ec99b696a52e139c198e6b976720c173729bd63dee86f8ef1911b20",
+        "size": "109.6 MB",
+        "date": "2026-07-31"
+    },
+    {
+        "name": "Shizuku",
+        "url": "https://apt.izzysoft.de/fdroid/repo/moe.shizuku.privileged.api_1086.apk",
+        "size": "2.5 MB",
+        "date": "2026-07-31"
+    },
+    {
         "name": "游龙工具",
         "url": "https://youlong.pages.dev/",
         "size": "97.2 MB",
