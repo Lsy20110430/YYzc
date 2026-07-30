@@ -23,37 +23,6 @@
             min-height: 100vh;
         }
 
-        .access-denied-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.88);
-            backdrop-filter: blur(8px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 99999;
-            flex-direction: column;
-            padding: 2rem;
-            text-align: center;
-        }
-        .access-denied-overlay h2 {
-            color: #ff6b6b;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        .access-denied-overlay p {
-            color: #eae6f2;
-            font-size: 1rem;
-            max-width: 400px;
-            opacity: 0.8;
-        }
-        .access-denied-overlay .denied-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
         #mainContent {
             display: block;
             max-width: 1000px;
@@ -328,14 +297,6 @@
 </head>
 <body>
 
-<!-- ===== 访问拒绝遮罩 ===== -->
-<div id="accessDeniedOverlay" class="access-denied-overlay">
-    <div class="denied-icon">🚫</div>
-    <h2>访问受限</h2>
-    <p>请通过 <strong>安全入口</strong> 验证后进入，<br>直接访问是不被允许的哦～</p>
-</div>
-
-<!-- ===== 主内容 ===== -->
 <div id="mainContent">
     <div class="glass-block">
         <div class="back-bar">
@@ -365,28 +326,14 @@
 
 <script>
     // ============================================================
-    // 访问控制：localStorage + 时间戳（有效期 24 小时）
+    // 人机验证检查
     // ============================================================
     (function() {
-        const AUTH_KEY = 'yunyao_authorized';
-        const TIME_KEY = 'yunyao_auth_time';
-        const EXPIRE_HOURS = 24;
-        const EXPIRE_MS = EXPIRE_HOURS * 60 * 60 * 1000;
-
-        const isAuthorized = localStorage.getItem(AUTH_KEY) === 'true';
-        const authTime = parseInt(localStorage.getItem(TIME_KEY) || '0');
-        const isExpired = (Date.now() - authTime) > EXPIRE_MS;
-
-        if (!isAuthorized || isExpired) {
-            if (isExpired) {
-                localStorage.removeItem(AUTH_KEY);
-                localStorage.removeItem(TIME_KEY);
-            }
+        const isVerified = sessionStorage.getItem('yunyao_verified') === 'true';
+        if (!isVerified) {
             window.location.href = 'index.html';
             return;
         }
-
-        document.getElementById('accessDeniedOverlay').style.display = 'none';
         document.getElementById('mainContent').style.display = 'block';
     })();
 
