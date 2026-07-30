@@ -27,7 +27,7 @@
         }
 
         #mainContent {
-            display: block;
+            display: none;
             width: 100%;
             max-width: 500px;
         }
@@ -149,12 +149,28 @@
 
 <script>
     (function() {
-        // 人机验证检查
-        const isVerified = sessionStorage.getItem('yunyao_verified') === 'true';
-        if (!isVerified) {
+        // ===== 验证状态管理 =====
+        const VERIFY_KEY = 'yunyao_verified';
+        const TIME_KEY = 'yunyao_verify_time';
+        const EXPIRE_HOURS = 24;
+        const EXPIRE_MS = EXPIRE_HOURS * 60 * 60 * 1000;
+
+        function isVerifiedValid() {
+            const verified = localStorage.getItem(VERIFY_KEY) === 'true';
+            const time = parseInt(localStorage.getItem(TIME_KEY) || '0');
+            const notExpired = (Date.now() - time) < EXPIRE_MS;
+            return verified && notExpired;
+        }
+
+        if (!isVerifiedValid()) {
+            if (localStorage.getItem(VERIFY_KEY) === 'true') {
+                localStorage.removeItem(VERIFY_KEY);
+                localStorage.removeItem(TIME_KEY);
+            }
             window.location.href = 'index.html';
             return;
         }
+
         document.getElementById('mainContent').style.display = 'block';
     })();
 </script>

@@ -262,6 +262,32 @@
 
     const REDIRECT_URL = "home.html";
 
+    // ===== 验证状态管理 =====
+    const VERIFY_KEY = 'yunyao_verified';
+    const TIME_KEY = 'yunyao_verify_time';
+    const EXPIRE_HOURS = 24;
+    const EXPIRE_MS = EXPIRE_HOURS * 60 * 60 * 1000;
+
+    function isVerifiedValid() {
+      const verified = localStorage.getItem(VERIFY_KEY) === 'true';
+      const time = parseInt(localStorage.getItem(TIME_KEY) || '0');
+      const notExpired = (Date.now() - time) < EXPIRE_MS;
+      return verified && notExpired;
+    }
+
+    // 如果已经验证过且未过期，直接跳转
+    if (isVerifiedValid()) {
+      window.location.href = REDIRECT_URL;
+      return;
+    }
+
+    // 如果已过期，清除旧数据
+    if (localStorage.getItem(VERIFY_KEY) === 'true') {
+      localStorage.removeItem(VERIFY_KEY);
+      localStorage.removeItem(TIME_KEY);
+    }
+
+    // ===== 滑块验证逻辑 =====
     const captchaTrack = document.getElementById('captchaTrack');
     const captchaBg = document.getElementById('captchaBg');
     const captchaThumb = document.getElementById('captchaThumb');
@@ -272,7 +298,6 @@
 
     let captchaResolved = false;
     let isDragging = false;
-    let startX = 0;
     let currentX = 0;
     const TRACK_PADDING = 6;
     const thumbWidth = 48;
@@ -310,7 +335,7 @@
       isDragging = true;
       const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
       const rect = captchaTrack.getBoundingClientRect();
-      startX = clientX - rect.left - thumbWidth / 2;
+      const startX = clientX - rect.left - thumbWidth / 2;
       captchaTrack.style.cursor = 'grabbing';
     }
 
@@ -371,8 +396,11 @@
     function doVerify() {
       if (!captchaResolved) return;
       try {
-        sessionStorage.setItem('yunyao_verified', 'true');
-        sessionStorage.setItem('yunyao_verify_time', Date.now().toString());
+        localStorage.setItem(VERIFY_KEY, 'true');
+        localStorage.setItem(TIME_KEY, Date.now().toString());
+        if (localStorage.getItem(VERIFY_KEY) !== 'true') {
+          throw new Error('写入失败');
+        }
       } catch (e) {
         setMessage('存储失败，请重试', 'error');
         return;
@@ -385,13 +413,7 @@
 
     captchaConfirmBtn.addEventListener('click', doVerify);
 
-    // 初始化
     initCaptcha();
-
-    // 如果已经验证过，直接跳转
-    if (sessionStorage.getItem('yunyao_verified') === 'true') {
-      window.location.href = REDIRECT_URL;
-    }
   })();
 </script>
 

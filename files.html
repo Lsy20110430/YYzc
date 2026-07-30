@@ -24,7 +24,7 @@
         }
 
         #mainContent {
-            display: block;
+            display: none;
             max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
@@ -265,16 +265,6 @@
             color: #8a7e9e;
         }
 
-        .stats {
-            background: rgba(255,138,174,0.10);
-            padding: 8px 16px;
-            border-radius: 20px;
-            margin-bottom: 16px;
-            font-size: 14px;
-            color: #cdc2e6;
-            border: 1px solid rgba(255,138,174,0.15);
-        }
-
         .footer {
             text-align: center;
             font-size: 0.7rem;
@@ -326,14 +316,30 @@
 
 <script>
     // ============================================================
-    // 人机验证检查
+    // 验证检查（使用 localStorage，有效期 24 小时）
     // ============================================================
     (function() {
-        const isVerified = sessionStorage.getItem('yunyao_verified') === 'true';
-        if (!isVerified) {
+        const VERIFY_KEY = 'yunyao_verified';
+        const TIME_KEY = 'yunyao_verify_time';
+        const EXPIRE_HOURS = 24;
+        const EXPIRE_MS = EXPIRE_HOURS * 60 * 60 * 1000;
+
+        function isVerifiedValid() {
+            const verified = localStorage.getItem(VERIFY_KEY) === 'true';
+            const time = parseInt(localStorage.getItem(TIME_KEY) || '0');
+            const notExpired = (Date.now() - time) < EXPIRE_MS;
+            return verified && notExpired;
+        }
+
+        if (!isVerifiedValid()) {
+            if (localStorage.getItem(VERIFY_KEY) === 'true') {
+                localStorage.removeItem(VERIFY_KEY);
+                localStorage.removeItem(TIME_KEY);
+            }
             window.location.href = 'index.html';
             return;
         }
+
         document.getElementById('mainContent').style.display = 'block';
     })();
 

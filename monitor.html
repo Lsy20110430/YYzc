@@ -24,7 +24,7 @@
         }
 
         #mainContent {
-            display: block;
+            display: none;
             max-width: 900px;
             margin: 0 auto;
             padding: 0 20px;
@@ -291,11 +291,27 @@
 
 <script>
     (function() {
-        const isVerified = sessionStorage.getItem('yunyao_verified') === 'true';
-        if (!isVerified) {
+        const VERIFY_KEY = 'yunyao_verified';
+        const TIME_KEY = 'yunyao_verify_time';
+        const EXPIRE_HOURS = 24;
+        const EXPIRE_MS = EXPIRE_HOURS * 60 * 60 * 1000;
+
+        function isVerifiedValid() {
+            const verified = localStorage.getItem(VERIFY_KEY) === 'true';
+            const time = parseInt(localStorage.getItem(TIME_KEY) || '0');
+            const notExpired = (Date.now() - time) < EXPIRE_MS;
+            return verified && notExpired;
+        }
+
+        if (!isVerifiedValid()) {
+            if (localStorage.getItem(VERIFY_KEY) === 'true') {
+                localStorage.removeItem(VERIFY_KEY);
+                localStorage.removeItem(TIME_KEY);
+            }
             window.location.href = 'index.html';
             return;
         }
+
         document.getElementById('mainContent').style.display = 'block';
     })();
 
