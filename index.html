@@ -240,14 +240,202 @@
       display: none !important;
     }
 
+    /* ===== 用户协议弹窗 ===== */
+    #agreementOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.50);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      padding: 20px;
+      flex-direction: column;
+    }
+
+    #agreementOverlay.hidden {
+      display: none;
+    }
+
+    .agreement-box {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border-radius: 48px;
+      padding: 2.2rem 2rem;
+      max-width: 480px;
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 40px 80px -20px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.10);
+      animation: slideUp 0.4s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .agreement-title {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 1.5rem;
+      font-weight: 200;
+      letter-spacing: 2px;
+      text-align: center;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .agreement-body {
+      color: #000000;
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.9;
+      text-align: left;
+      margin-bottom: 1.2rem;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 1rem 1.2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .agreement-body p {
+      margin-bottom: 0.6rem;
+    }
+
+    .agreement-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .agreement-body .link {
+      color: #4a9eff;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .agreement-body .link:hover {
+      color: #6ab4ff;
+    }
+
+    .agreement-divider {
+      border: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      margin: 0.6rem 0;
+    }
+
+    .agreement-footer {
+      text-align: center;
+      color: rgba(0, 0, 0, 0.35);
+      font-size: 0.85rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+
+    .agreement-actions {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .agreement-actions .btn-agree {
+      flex: 2;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 60px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(4px);
+    }
+
+    .agreement-actions .btn-agree:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.02);
+    }
+
+    .agreement-actions .btn-disagree {
+      flex: 1;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 60px;
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.40);
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(4px);
+    }
+
+    .agreement-actions .btn-disagree:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.60);
+    }
+
     @media (max-width: 480px) {
       .card { padding: 2rem 1.5rem; }
       h1 { font-size: 1.9rem; }
+      .agreement-box { padding: 1.5rem 1.2rem; }
+      .agreement-title { font-size: 1.3rem; }
+      .agreement-body { font-size: 0.8rem; padding: 0.8rem 1rem; }
+      .agreement-actions { flex-direction: column-reverse; gap: 0.5rem; }
+      .agreement-actions .btn-agree { padding: 0.7rem; }
+      .agreement-actions .btn-disagree { padding: 0.6rem; }
     }
   </style>
 </head>
 <body>
 
+<!-- ===== 用户协议弹窗 ===== -->
+<div id="agreementOverlay">
+  <div class="agreement-box">
+    <div class="agreement-title">📋 用户协议</div>
+
+    <div class="agreement-body">
+      <p>
+        欢迎使用 <strong>韵殷 · 公益文件分享</strong>。在使用本网站前，请您仔细阅读以下协议内容。
+      </p>
+      <p>
+        本网站为纯公益性质，所有资源均经过亲测，仅供学习交流使用。您在使用过程中产生的任何风险，由您自行承担。
+      </p>
+      <p>
+        我们非常重视您的隐私保护。关于我们如何收集、使用和存储您的信息，请查看：
+        <br>
+        <span class="link" onclick="window.open('data/privacy.txt', '_blank')">📄 隐私协议</span>
+        ・
+        <span class="link" onclick="window.open('data/cookies.txt', '_blank')">🍪 Cookies 说明</span>
+      </p>
+      <hr class="agreement-divider">
+      <p style="font-size:0.85rem; color:rgba(0,0,0,0.40);">
+        继续使用即表示您已阅读并同意以上全部条款。
+      </p>
+    </div>
+
+    <div class="agreement-footer">您需要确认同意才可使用本网站</div>
+
+    <div class="agreement-actions">
+      <button class="btn-disagree" id="disagreeBtn">不同意</button>
+      <button class="btn-agree" id="agreeBtn">同意并进入</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 主内容 ===== -->
 <div class="card" role="main">
   <h1>🌸 安全入口</h1>
   <div class="subhead">韵殷 · 人机验证</div>
@@ -281,6 +469,14 @@
 
     const REDIRECT_URL = "home.html";
 
+    // ===== 用户协议状态 =====
+    const AGREEMENT_KEY = 'yunyao_agreement_accepted';
+
+    function isAgreementAccepted() {
+      return localStorage.getItem(AGREEMENT_KEY) === 'true';
+    }
+
+    // ===== 验证状态管理 =====
     const VERIFY_KEY = 'yunyao_verified';
     const TIME_KEY = 'yunyao_verify_time';
     const EXPIRE_HOURS = 24;
@@ -293,12 +489,56 @@
       return verified && notExpired;
     }
 
-    if (isVerifiedValid()) {
+    // ===== 如果已登录且已同意协议，直接跳转 =====
+    if (isVerifiedValid() && isAgreementAccepted()) {
       window.location.href = REDIRECT_URL;
       return;
     }
 
-    if (localStorage.getItem(VERIFY_KEY) === 'true') {
+    // ===== 如果已同意协议但未验证，隐藏协议弹窗，显示验证 =====
+    if (isAgreementAccepted()) {
+      document.getElementById('agreementOverlay').classList.add('hidden');
+    }
+
+    // ===== 协议按钮事件 =====
+    const agreeBtn = document.getElementById('agreeBtn');
+    const disagreeBtn = document.getElementById('disagreeBtn');
+    const agreementOverlay = document.getElementById('agreementOverlay');
+
+    // ===== 同意协议 =====
+    agreeBtn.addEventListener('click', function() {
+      localStorage.setItem(AGREEMENT_KEY, 'true');
+      agreementOverlay.classList.add('hidden');
+
+      // 如果已验证，直接跳转
+      if (isVerifiedValid()) {
+        window.location.href = REDIRECT_URL;
+      }
+    });
+
+    // ===== 不同意协议 =====
+    disagreeBtn.addEventListener('click', function() {
+      if (confirm('您需要同意用户协议才能使用本网站。\n\n点击"确定"重新阅读协议，点击"取消"离开网站。')) {
+        // 重新显示协议，不做其他操作
+        agreementOverlay.classList.remove('hidden');
+      } else {
+        // 用户选择离开
+        document.body.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#1a1625;color:#eae6f2;font-family:sans-serif;padding:20px;text-align:center;">
+            <div>
+              <h2 style="font-weight:200;margin-bottom:1rem;">🙏 感谢您的访问</h2>
+              <p style="color:rgba(255,255,255,0.5);font-weight:300;">您已选择不同意用户协议，将无法继续使用本网站。</p>
+              <p style="color:rgba(255,255,255,0.3);font-weight:300;font-size:0.8rem;margin-top:1rem;">如果您改变了主意，请刷新页面重新选择。</p>
+            </div>
+          </div>
+        `;
+      }
+    });
+
+    // ============================================================
+    // 滑块验证（原有逻辑）
+    // ============================================================
+    if (!isVerifiedValid() && localStorage.getItem(VERIFY_KEY) === 'true') {
       localStorage.removeItem(VERIFY_KEY);
       localStorage.removeItem(TIME_KEY);
     }
@@ -399,6 +639,13 @@
 
     function doVerify() {
       if (!captchaResolved) return;
+
+      // 检查是否已同意协议
+      if (!isAgreementAccepted()) {
+        agreementOverlay.classList.remove('hidden');
+        return;
+      }
+
       try {
         localStorage.setItem(VERIFY_KEY, 'true');
         localStorage.setItem(TIME_KEY, Date.now().toString());
