@@ -29,7 +29,6 @@
             padding: 0 20px;
         }
 
-        /* ===== 大框：高透明度玻璃感 ===== */
         .glass-block {
             background: rgba(255, 255, 255, 0.22);
             backdrop-filter: saturate(150%);
@@ -173,9 +172,70 @@
         .file-list {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
+            min-height: 120px;
         }
 
+        /* ===== 骨架屏 ===== */
+        .skeleton-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            animation: skeletonPulse 1.2s ease-in-out infinite;
+        }
+
+        .skeleton-item .skeleton-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .skeleton-item .skeleton-icon {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+        }
+
+        .skeleton-item .skeleton-name {
+            height: 16px;
+            width: 55%;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+        }
+
+        .skeleton-item .skeleton-right {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .skeleton-item .skeleton-size {
+            height: 14px;
+            width: 50px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+        }
+
+        .skeleton-item .skeleton-date {
+            height: 14px;
+            width: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        @keyframes skeletonPulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0.4; }
+        }
+
+        /* ===== 列表项进入动画 ===== */
         .file-item {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -187,6 +247,34 @@
             padding: 12px 18px;
             transition: all 0.3s ease;
             text-decoration: none;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: itemFadeIn 0.3s ease forwards;
+        }
+
+        .file-item:nth-child(1) { animation-delay: 0.02s; }
+        .file-item:nth-child(2) { animation-delay: 0.04s; }
+        .file-item:nth-child(3) { animation-delay: 0.06s; }
+        .file-item:nth-child(4) { animation-delay: 0.08s; }
+        .file-item:nth-child(5) { animation-delay: 0.10s; }
+        .file-item:nth-child(6) { animation-delay: 0.12s; }
+        .file-item:nth-child(7) { animation-delay: 0.14s; }
+        .file-item:nth-child(8) { animation-delay: 0.16s; }
+        .file-item:nth-child(9) { animation-delay: 0.18s; }
+        .file-item:nth-child(10) { animation-delay: 0.20s; }
+        .file-item:nth-child(11) { animation-delay: 0.22s; }
+        .file-item:nth-child(12) { animation-delay: 0.24s; }
+        .file-item:nth-child(13) { animation-delay: 0.26s; }
+        .file-item:nth-child(14) { animation-delay: 0.28s; }
+        .file-item:nth-child(15) { animation-delay: 0.30s; }
+        .file-item:nth-child(16) { animation-delay: 0.32s; }
+        .file-item:nth-child(17) { animation-delay: 0.34s; }
+        .file-item:nth-child(18) { animation-delay: 0.36s; }
+        .file-item:nth-child(19) { animation-delay: 0.38s; }
+        .file-item:nth-child(20) { animation-delay: 0.40s; }
+
+        @keyframes itemFadeIn {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .file-item:hover {
@@ -240,6 +328,8 @@
             font-weight: 200;
             text-align: center;
             padding: 40px 20px;
+            opacity: 0;
+            animation: itemFadeIn 0.3s ease 0.1s forwards;
         }
 
         .pagination {
@@ -251,6 +341,8 @@
             padding-top: 16px;
             border-top: 1px solid rgba(0, 0, 0, 0.04);
             flex-wrap: wrap;
+            opacity: 0;
+            animation: itemFadeIn 0.3s ease 0.2s forwards;
         }
 
         .page-btn {
@@ -296,6 +388,229 @@
             letter-spacing: 1px;
             text-align: center;
             margin-top: 1rem;
+            opacity: 0;
+            animation: itemFadeIn 0.3s ease 0.3s forwards;
+        }
+
+        /* ===== 弹窗样式 ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px) saturate(200%);
+            -webkit-backdrop-filter: blur(20px) saturate(200%);
+            border-radius: 40px;
+            padding: 2.2rem 2rem;
+            max-width: 440px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.20);
+            box-shadow: 
+                0 40px 80px -20px rgba(0, 0, 0, 0.20),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.10);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-title {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.5rem;
+            font-weight: 200;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .modal-title .icon {
+            margin-right: 8px;
+        }
+
+        .modal-body {
+            color: #000000;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.9;
+            text-align: left;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 1rem 1.2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .modal-body p {
+            margin-bottom: 0.7rem;
+        }
+
+        .modal-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-body .highlight {
+            color: #ff8a50;
+            font-weight: 400;
+        }
+
+        .modal-body .highlight-red {
+            color: #cc2233;
+            font-weight: 400;
+        }
+
+        .modal-body .section-title {
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+            margin-bottom: 0.3rem;
+            color: #000000;
+            border-left: 3px solid rgba(255, 255, 255, 0.30);
+            padding-left: 0.7rem;
+        }
+
+        .modal-divider {
+            border: none;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            margin: 0.6rem 0;
+        }
+
+        .modal-close-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #000000;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.22);
+            transform: scale(1.02);
+        }
+
+        .modal-overlay.hidden {
+            display: none;
+        }
+
+        /* ===== 倒计时遮罩 ===== */
+        #expireOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.50);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        #expireOverlay.show {
+            display: flex;
+        }
+
+        .expire-box {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border-radius: 48px;
+            padding: 2.5rem 2.2rem;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 40px 80px -20px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.10);
+            text-align: center;
+            animation: slideUp 0.4s ease;
+        }
+
+        .expire-icon {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .expire-title {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .expire-body {
+            color: rgba(255, 255, 255, 0.60);
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .expire-countdown {
+            font-size: 3rem;
+            font-weight: 200;
+            color: rgba(255, 255, 255, 0.90);
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .expire-btn {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            border: none;
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(4px);
+            text-decoration: none;
+        }
+
+        .expire-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.02);
         }
 
         @media (max-width: 640px) {
@@ -307,11 +622,54 @@
             .search-hint { text-align: center; font-size: 11px; }
             .back-bar { gap: 0.5rem; }
             #mainContent { padding: 0 12px; }
+            .modal-box { padding: 1.5rem 1.2rem; }
+            .modal-title { font-size: 1.3rem; }
+            .modal-body { font-size: 0.8rem; padding: 0.8rem 1rem; }
+            .expire-box { padding: 2rem 1.5rem; }
+            .expire-countdown { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
+<!-- ===== 验证过期遮罩 ===== -->
+<div id="expireOverlay">
+    <div class="expire-box">
+        <div class="expire-icon">⏳</div>
+        <div class="expire-title">验证已过期</div>
+        <div class="expire-body">请重新验证后继续使用</div>
+        <div class="expire-countdown" id="countdownDisplay">5</div>
+        <a href="index.html" class="expire-btn" id="expireRedirectBtn">直接验证</a>
+    </div>
+</div>
+
+<!-- ===== 安全提示弹窗 ===== -->
+<div id="securityModal" class="modal-overlay">
+    <div class="modal-box">
+        <div class="modal-title"><span class="icon">🛡️</span> 下载安全提示</div>
+        <div class="modal-body">
+            <p>
+                韵殷团队已对所有文件进行 <span class="highlight">亲测扫描</span>，<br>
+                确认无病毒、无恶意行为，请您放心下载。
+            </p>
+            <hr class="modal-divider">
+            <div class="section-title">⚠️ 请注意</div>
+            <p>
+                • 部分文件来源于第三方下载站，链接由网友提供<br>
+                • 团队虽已自测，但 <span class="highlight-red">无法保证第三方后续是否篡改文件</span><br>
+                • 下载后请自行使用杀毒软件扫描，<span class="highlight-red">风险由用户自行承担</span>
+            </p>
+            <hr class="modal-divider">
+            <p style="font-size:0.85rem; color:rgba(0,0,0,0.50);">
+                📬 如发现文件异常，请立即通过 QQ群 / 频道 / 邮箱 反馈，<br>
+                我们会第一时间核实处理。
+            </p>
+        </div>
+        <button class="modal-close-btn" id="closeSecurityModalBtn">我知道了</button>
+    </div>
+</div>
+
+<!-- ===== 主内容 ===== -->
 <div id="mainContent">
     <div class="glass-block">
         <div class="back-bar">
@@ -329,9 +687,7 @@
             <span class="search-hint" id="searchHint">共 <span id="totalCount">0</span> 个文件</span>
         </div>
 
-        <div class="file-list" id="fileList">
-            <div class="empty">⏳ 加载中...</div>
-        </div>
+        <div class="file-list" id="fileList"></div>
 
         <div class="pagination" id="pagination"></div>
 
@@ -341,6 +697,9 @@
 
 <script>
     (function() {
+        // ============================================================
+        // 1. 验证检查 + 过期倒计时遮罩
+        // ============================================================
         const VERIFY_KEY = 'yunyao_verified';
         const TIME_KEY = 'yunyao_verify_time';
         const EXPIRE_HOURS = 24;
@@ -358,13 +717,70 @@
                 localStorage.removeItem(VERIFY_KEY);
                 localStorage.removeItem(TIME_KEY);
             }
-            window.location.href = 'index.html';
+
+            const overlay = document.getElementById('expireOverlay');
+            const countdownDisplay = document.getElementById('countdownDisplay');
+            const redirectBtn = document.getElementById('expireRedirectBtn');
+            let countdown = 5;
+
+            overlay.classList.add('show');
+
+            const timer = setInterval(function() {
+                countdown -= 1;
+                countdownDisplay.textContent = countdown;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+
+            redirectBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                clearInterval(timer);
+                window.location.href = 'index.html';
+            });
+
+            document.body.style.overflow = 'hidden';
             return;
         }
 
         document.getElementById('mainContent').style.display = 'block';
+        document.body.style.overflow = '';
+
+        // ============================================================
+        // 2. 安全提示弹窗（每 2 小时显示一次）
+        // ============================================================
+        const securityModal = document.getElementById('securityModal');
+        const closeSecurityBtn = document.getElementById('closeSecurityModalBtn');
+
+        const SECURITY_KEY = 'yunyao_security_time';
+        const SECURITY_INTERVAL = 2 * 60 * 60 * 1000;
+
+        const lastSecurityTime = parseInt(localStorage.getItem(SECURITY_KEY) || '0');
+        const now = Date.now();
+
+        if (lastSecurityTime === 0 || (now - lastSecurityTime) > SECURITY_INTERVAL) {
+            securityModal.classList.remove('hidden');
+        } else {
+            securityModal.classList.add('hidden');
+        }
+
+        closeSecurityBtn.addEventListener('click', function() {
+            securityModal.classList.add('hidden');
+            localStorage.setItem(SECURITY_KEY, Date.now().toString());
+        });
+
+        securityModal.addEventListener('click', function(e) {
+            if (e.target === securityModal) {
+                securityModal.classList.add('hidden');
+                localStorage.setItem(SECURITY_KEY, Date.now().toString());
+            }
+        });
     })();
 
+    // ============================================================
+    // 3. 文件列表功能（含骨架屏）
+    // ============================================================
     const PER_PAGE = 20;
     let allFiles = [];
     let filteredFiles = [];
@@ -377,6 +793,28 @@
     const clearSearchBtn = document.getElementById('clearSearchBtn');
     const totalCountSpan = document.getElementById('totalCount');
     const fileCountSpan = document.getElementById('fileCount');
+
+    // ===== 渲染骨架屏 =====
+    function renderSkeleton(count) {
+        let html = '';
+        for (let i = 0; i < count; i++) {
+            html += `
+                <div class="skeleton-item">
+                    <div class="skeleton-left">
+                        <div class="skeleton-icon"></div>
+                        <div class="skeleton-name"></div>
+                    </div>
+                    <div class="skeleton-right">
+                        <div class="skeleton-size"></div>
+                        <div class="skeleton-date"></div>
+                    </div>
+                </div>
+            `;
+        }
+        fileList.innerHTML = html;
+    }
+
+    renderSkeleton(10);
 
     async function loadFiles() {
         try {

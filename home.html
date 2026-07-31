@@ -121,7 +121,6 @@
             margin-top: 2px;
         }
 
-        /* ===== 赞助按钮特殊样式 ===== */
         .menu-btn.sponsor {
             background: rgba(255, 200, 50, 0.15);
             border-color: rgba(255, 200, 50, 0.30);
@@ -137,6 +136,11 @@
 
         .menu-btn.sponsor .icon {
             opacity: 1;
+        }
+
+        .menu-btn.project .desc {
+            color: #cc2233;
+            font-weight: 400;
         }
 
         .footer {
@@ -188,7 +192,7 @@
             -webkit-backdrop-filter: blur(20px) saturate(200%);
             border-radius: 40px;
             padding: 2.2rem 2rem;
-            max-width: 460px;
+            max-width: 420px;
             width: 100%;
             border: 1px solid rgba(255, 255, 255, 0.20);
             box-shadow: 
@@ -196,6 +200,7 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.6),
                 inset 0 -1px 0 rgba(255, 255, 255, 0.10);
             animation: slideUp 0.4s ease;
+            text-align: center;
         }
 
         @keyframes slideUp {
@@ -203,40 +208,38 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        .modal-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
         .modal-title {
             color: rgba(255, 255, 255, 0.95);
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 200;
             letter-spacing: 2px;
-            text-align: center;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             text-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
         }
 
-        .modal-title .icon {
-            margin-right: 8px;
-        }
-
         .modal-body {
-            color: #000000;
-            font-size: 0.9rem;
-            font-weight: 300;
+            color: #cc2233;
+            font-size: 1rem;
+            font-weight: 400;
             line-height: 1.8;
-            text-align: left;
+            text-align: center;
             margin-bottom: 1.5rem;
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(200, 30, 30, 0.04);
             padding: 1rem 1.2rem;
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(200, 30, 30, 0.08);
         }
 
-        .modal-body strong {
-            font-weight: 500;
-        }
-
-        .modal-body .highlight {
-            color: #ff8a50;
-            font-weight: 400;
+        .modal-body .sub-text {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: rgba(200, 30, 30, 0.60);
+            margin-top: 4px;
         }
 
         .modal-close-btn {
@@ -261,33 +264,238 @@
             transform: scale(1.02);
         }
 
-        /* ===== 弹窗显示控制 ===== */
         .modal-overlay.hidden {
             display: none;
         }
 
-        /* ===== 响应式 ===== */
+        /* ===== 公告弹窗样式 ===== */
+        .modal-box.announcement .modal-body {
+            color: #000000;
+            font-weight: 300;
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.04);
+        }
+
+        .modal-box.announcement .modal-body .highlight {
+            color: #ff8a50;
+            font-weight: 400;
+        }
+
+        .modal-box.announcement .modal-body .highlight-green {
+            color: #00996b;
+            font-weight: 400;
+        }
+
+        .modal-box.announcement .modal-body .section-title {
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.3rem;
+            color: #000000;
+            border-left: 3px solid rgba(255, 255, 255, 0.30);
+            padding-left: 0.7rem;
+            text-align: left;
+        }
+
+        .modal-box.announcement .modal-body .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 2px 0;
+        }
+
+        .modal-box.announcement .modal-body .contact-item .label {
+            font-weight: 400;
+            min-width: 48px;
+        }
+
+        .modal-box.announcement .modal-body .contact-item .value {
+            font-weight: 300;
+            color: rgba(0, 0, 0, 0.75);
+        }
+
+        .modal-divider {
+            border: none;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            margin: 0.8rem 0;
+        }
+
+        /* ===== 倒计时遮罩 ===== */
+        #expireOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.50);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        #expireOverlay.show {
+            display: flex;
+        }
+
+        .expire-box {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border-radius: 48px;
+            padding: 2.5rem 2.2rem;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 40px 80px -20px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.10);
+            text-align: center;
+            animation: slideUp 0.4s ease;
+        }
+
+        .expire-icon {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .expire-title {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .expire-body {
+            color: rgba(255, 255, 255, 0.60);
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .expire-countdown {
+            font-size: 3rem;
+            font-weight: 200;
+            color: rgba(255, 255, 255, 0.90);
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .expire-btn {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            border: none;
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(4px);
+            text-decoration: none;
+        }
+
+        .expire-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.02);
+        }
+
         @media (max-width: 480px) {
             .modal-box { padding: 1.5rem 1.2rem; }
             .modal-title { font-size: 1.3rem; }
-            .modal-body { font-size: 0.8rem; padding: 0.8rem 1rem; }
+            .modal-body { font-size: 0.85rem; padding: 0.8rem 1rem; }
+            .expire-box { padding: 2rem 1.5rem; }
+            .expire-countdown { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
+<!-- ===== 验证过期遮罩 ===== -->
+<div id="expireOverlay">
+    <div class="expire-box">
+        <div class="expire-icon">⏳</div>
+        <div class="expire-title">验证已过期</div>
+        <div class="expire-body">请重新验证后继续使用</div>
+        <div class="expire-countdown" id="countdownDisplay">5</div>
+        <a href="index.html" class="expire-btn" id="expireRedirectBtn">直接验证</a>
+    </div>
+</div>
+
 <!-- ===== 公告弹窗 ===== -->
 <div id="announcementModal" class="modal-overlay">
-    <div class="modal-box">
-        <div class="modal-title"><span class="icon">📢</span> 公告</div>
+    <div class="modal-box announcement">
+        <div class="modal-title"><span class="icon">📢</span> 韵殷 · 公益文件分享</div>
         <div class="modal-body">
-            <strong>欢迎大家使用韵殷 · 公益文件分享</strong>，感谢大家的支持。<br><br>
-            纯公益开设，大家可以赞助一下，让韵殷团队的更新动力更高。<br><br>
-            📱 <strong>QQ群：</strong>454493903<br>
-            📢 <strong>Q频道：</strong>pd75072875<br>
-            📧 <strong>邮箱：</strong>ruinwisp@outlook.com
+            <p>🌸 欢迎大家使用 <strong>韵殷 · 公益文件分享</strong>，感谢每一位用户的支持。</p>
+            <hr class="modal-divider">
+            <div class="section-title">💰 关于赞助</div>
+            <p>
+                本项目为 <strong>纯公益性质</strong>，所有资源免费下载。<br>
+                赞助款项分为两部分：
+            </p>
+            <p style="padding-left: 0.5rem; margin-top: -0.2rem;">
+                • <span class="highlight">50%</span> 用于 <strong>网站运营</strong>（服务器、域名、维护）<br>
+                • <span class="highlight-green">50%</span> 用于 <strong>公益捐款</strong>（定期捐助贫困学生 / 环保 / 动物保护等）
+            </p>
+            <p style="font-size:0.85rem; color:rgba(0,0,0,0.45);">
+                📊 每季度公开收支明细，让每一份善意都清晰可见。
+            </p>
+            <hr class="modal-divider">
+            <div class="section-title">💖 感谢支持</div>
+            <p>
+                无论是否赞助，您的每一次访问都是对我们的鼓励。<br>
+                如果您愿意支持，请点击下方 <span class="highlight">「赞助我们」</span>，<br>
+                您的善意将让 <strong>韵殷</strong> 走得更远，也让更多需要帮助的人感受到温暖。
+            </p>
+            <hr class="modal-divider">
+            <div class="section-title">📬 反馈与报错</div>
+            <p>
+                如果遇到 <span class="highlight">文件失效、链接错误</span> 或任何问题，<br>
+                请通过以下方式告知我们，我们会尽快处理：
+            </p>
+            <div style="margin-top:6px;">
+                <div class="contact-item">
+                    <span class="label">📱 QQ群</span>
+                    <span class="value">454493903</span>
+                </div>
+                <div class="contact-item">
+                    <span class="label">📢 频道</span>
+                    <span class="value">pd75072875</span>
+                </div>
+                <div class="contact-item">
+                    <span class="label">📧 邮箱</span>
+                    <span class="value">ruinwisp@outlook.com</span>
+                </div>
+            </div>
+            <p style="margin-top:6px; font-size:0.8rem; color:rgba(0,0,0,0.40);">
+                ⚡ 您的反馈让韵殷变得更好
+            </p>
         </div>
         <button class="modal-close-btn" id="closeModalBtn">我知道了</button>
+    </div>
+</div>
+
+<!-- ===== 项目公示弹窗 ===== -->
+<div id="projectModal" class="modal-overlay hidden">
+    <div class="modal-box">
+        <div class="modal-icon">🚧</div>
+        <div class="modal-title">项目公示</div>
+        <div class="modal-body">
+            🔴 该功能正在建设，请等待后续更新汇报
+            <div class="sub-text">预计每季度末发布一期公示</div>
+        </div>
+        <button class="modal-close-btn" id="closeProjectModalBtn">我知道了</button>
     </div>
 </div>
 
@@ -312,7 +520,11 @@
             <span class="desc">浏览所有公益分享文件</span>
         </a>
 
-        <!-- ===== 赞助我们按钮 ===== -->
+        <a href="#" class="menu-btn project" id="projectBtn">
+            <span class="icon">📊</span> 项目公示
+            <span class="desc">🔴 该功能正在建设</span>
+        </a>
+
         <a href="sponsor.html" class="menu-btn sponsor">
             <span class="icon">❤️</span> 赞助我们
             <span class="desc">您的支持是我们最大的动力</span>
@@ -326,7 +538,9 @@
 
 <script>
     (function() {
-        // ===== 人机验证检查 =====
+        // ============================================================
+        // 1. 验证检查 + 过期倒计时遮罩
+        // ============================================================
         const VERIFY_KEY = 'yunyao_verified';
         const TIME_KEY = 'yunyao_verify_time';
         const EXPIRE_HOURS = 24;
@@ -344,35 +558,85 @@
                 localStorage.removeItem(VERIFY_KEY);
                 localStorage.removeItem(TIME_KEY);
             }
-            window.location.href = 'index.html';
+
+            const overlay = document.getElementById('expireOverlay');
+            const countdownDisplay = document.getElementById('countdownDisplay');
+            const redirectBtn = document.getElementById('expireRedirectBtn');
+            let countdown = 5;
+
+            overlay.classList.add('show');
+
+            const timer = setInterval(function() {
+                countdown -= 1;
+                countdownDisplay.textContent = countdown;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+
+            redirectBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                clearInterval(timer);
+                window.location.href = 'index.html';
+            });
+
+            document.body.style.overflow = 'hidden';
             return;
         }
 
         document.getElementById('mainContent').style.display = 'block';
+        document.body.style.overflow = '';
 
-        // ===== 公告弹窗控制 =====
-        const modal = document.getElementById('announcementModal');
-        const closeBtn = document.getElementById('closeModalBtn');
+        // ============================================================
+        // 2. 公告弹窗（每 2 小时显示一次）
+        // ============================================================
+        const announcementModal = document.getElementById('announcementModal');
+        const closeAnnouncementBtn = document.getElementById('closeModalBtn');
 
-        // 检查是否已经显示过弹窗（用 sessionStorage 记录，仅本次会话有效）
-        const hasShown = sessionStorage.getItem('announcement_shown');
+        const ANNOUNCE_KEY = 'yunyao_announce_time';
+        const ANNOUNCE_INTERVAL = 2 * 60 * 60 * 1000;
 
-        if (hasShown) {
-            modal.classList.add('hidden');
+        const lastAnnounceTime = parseInt(localStorage.getItem(ANNOUNCE_KEY) || '0');
+        const now = Date.now();
+
+        if (lastAnnounceTime === 0 || (now - lastAnnounceTime) > ANNOUNCE_INTERVAL) {
+            announcementModal.classList.remove('hidden');
         } else {
-            modal.classList.remove('hidden');
+            announcementModal.classList.add('hidden');
         }
 
-        closeBtn.addEventListener('click', function() {
-            modal.classList.add('hidden');
-            sessionStorage.setItem('announcement_shown', 'true');
+        closeAnnouncementBtn.addEventListener('click', function() {
+            announcementModal.classList.add('hidden');
+            localStorage.setItem(ANNOUNCE_KEY, Date.now().toString());
         });
 
-        // 点击遮罩也可关闭
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.classList.add('hidden');
-                sessionStorage.setItem('announcement_shown', 'true');
+        announcementModal.addEventListener('click', function(e) {
+            if (e.target === announcementModal) {
+                announcementModal.classList.add('hidden');
+                localStorage.setItem(ANNOUNCE_KEY, Date.now().toString());
+            }
+        });
+
+        // ============================================================
+        // 3. 项目公示弹窗
+        // ============================================================
+        const projectModal = document.getElementById('projectModal');
+        const closeProjectBtn = document.getElementById('closeProjectModalBtn');
+        const projectBtn = document.getElementById('projectBtn');
+
+        projectBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            projectModal.classList.remove('hidden');
+        });
+
+        closeProjectBtn.addEventListener('click', function() {
+            projectModal.classList.add('hidden');
+        });
+
+        projectModal.addEventListener('click', function(e) {
+            if (e.target === projectModal) {
+                projectModal.classList.add('hidden');
             }
         });
     })();

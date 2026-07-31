@@ -29,7 +29,6 @@
             padding: 0 20px;
         }
 
-        /* ===== 大框：高透明度玻璃感 ===== */
         .glass-block {
             background: rgba(255, 255, 255, 0.22);
             backdrop-filter: saturate(150%);
@@ -204,15 +203,119 @@
             margin-top: 1rem;
         }
 
+        /* ===== 倒计时遮罩 ===== */
+        #expireOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.50);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        #expireOverlay.show {
+            display: flex;
+        }
+
+        .expire-box {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border-radius: 48px;
+            padding: 2.5rem 2.2rem;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 40px 80px -20px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.10);
+            text-align: center;
+            animation: slideUp 0.4s ease;
+        }
+
+        .expire-icon {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .expire-title {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .expire-body {
+            color: rgba(255, 255, 255, 0.60);
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .expire-countdown {
+            font-size: 3rem;
+            font-weight: 200;
+            color: rgba(255, 255, 255, 0.90);
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .expire-btn {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            border: none;
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(4px);
+            text-decoration: none;
+        }
+
+        .expire-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.02);
+        }
+
         @media (max-width: 640px) {
             .glass-block { padding: 1.5rem; }
             .section-title { font-size: 1.3rem; }
             #mainContent { padding: 0 12px; }
+            .expire-box { padding: 2rem 1.5rem; }
+            .expire-countdown { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
+<!-- ===== 验证过期遮罩 ===== -->
+<div id="expireOverlay">
+    <div class="expire-box">
+        <div class="expire-icon">⏳</div>
+        <div class="expire-title">验证已过期</div>
+        <div class="expire-body">请重新验证后继续使用</div>
+        <div class="expire-countdown" id="countdownDisplay">5</div>
+        <a href="index.html" class="expire-btn" id="expireRedirectBtn">直接验证</a>
+    </div>
+</div>
+
+<!-- ===== 主内容 ===== -->
 <div id="mainContent">
     <div class="glass-block">
         <div class="back-bar">
@@ -280,6 +383,9 @@
 
 <script>
     (function() {
+        // ============================================================
+        // 验证检查 + 过期倒计时遮罩
+        // ============================================================
         const VERIFY_KEY = 'yunyao_verified';
         const TIME_KEY = 'yunyao_verify_time';
         const EXPIRE_HOURS = 24;
@@ -297,11 +403,35 @@
                 localStorage.removeItem(VERIFY_KEY);
                 localStorage.removeItem(TIME_KEY);
             }
-            window.location.href = 'index.html';
+
+            const overlay = document.getElementById('expireOverlay');
+            const countdownDisplay = document.getElementById('countdownDisplay');
+            const redirectBtn = document.getElementById('expireRedirectBtn');
+            let countdown = 5;
+
+            overlay.classList.add('show');
+
+            const timer = setInterval(function() {
+                countdown -= 1;
+                countdownDisplay.textContent = countdown;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+
+            redirectBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                clearInterval(timer);
+                window.location.href = 'index.html';
+            });
+
+            document.body.style.overflow = 'hidden';
             return;
         }
 
         document.getElementById('mainContent').style.display = 'block';
+        document.body.style.overflow = '';
     })();
 </script>
 
