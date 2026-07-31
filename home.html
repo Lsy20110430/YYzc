@@ -139,7 +139,7 @@
         }
 
         .menu-btn.project .desc {
-            color: #cc2233;
+            color: #000000;
             font-weight: 400;
         }
 
@@ -486,19 +486,6 @@
     </div>
 </div>
 
-<!-- ===== 项目公示弹窗 ===== -->
-<div id="projectModal" class="modal-overlay hidden">
-    <div class="modal-box">
-        <div class="modal-icon">🚧</div>
-        <div class="modal-title">项目公示</div>
-        <div class="modal-body">
-            🔴 该功能正在建设，请等待后续更新汇报
-            <div class="sub-text">预计每季度末发布一期公示</div>
-        </div>
-        <button class="modal-close-btn" id="closeProjectModalBtn">我知道了</button>
-    </div>
-</div>
-
 <!-- ===== 主内容 ===== -->
 <div id="mainContent">
     <div class="menu-container">
@@ -521,9 +508,10 @@
             <span class="desc">浏览所有公益分享文件</span>
         </a>
 
-        <a href="#" class="menu-btn project" id="projectBtn">
+        <!-- ===== 项目公示按钮（修改后） ===== -->
+        <a href="public.html" class="menu-btn project">
             <span class="icon">📊</span> 项目公示
-            <span class="desc">🔴 该功能正在建设</span>
+            <span class="desc">查看赞助月榜与捐款去向</span>
         </a>
 
         <a href="sponsor.html" class="menu-btn sponsor">

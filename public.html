@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>韵殷 · 项目公示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html { font-size: 14px; }
+        @media (max-width: 375px) { html { font-size: 12px; } }
+        @media (min-width: 768px) { html { font-size: 16px; } }
+
+        body {
+            background: #e8e6ed url("https://picui.ogmua.cn/s1/2026/07/31/6a6c81f424ff0.webp") no-repeat center center fixed;
+            background-size: cover;
+            font-family: "Microsoft YaHei", "Heiti SC", "Segoe UI", system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        #mainContent {
+            display: none;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .public-container {
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: saturate(150%);
+            -webkit-backdrop-filter: saturate(150%);
+            border-radius: 56px;
+            padding: 2.5rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            box-shadow: 
+                0 40px 80px -30px rgba(0, 0, 0, 0.10),
+                inset 0 1px 0 rgba(255, 255, 255, 1.0),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+                0 0 0 1px rgba(255, 255, 255, 0.18);
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .public-container:hover {
+            background: rgba(255, 255, 255, 0.32);
+            border-color: rgba(255, 255, 255, 0.40);
+            box-shadow: 
+                0 50px 100px -30px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 1.0),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.40),
+                0 0 0 1px rgba(255, 255, 255, 0.25);
+        }
+
+        .public-title {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 2rem;
+            font-weight: 200;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 40px rgba(0, 0, 0, 0.03);
+        }
+
+        .public-sub {
+            color: #000000;
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding-bottom: 1.2rem;
+        }
+
+        .public-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 60px;
+            color: #000000;
+            display: block;
+            width: 100%;
+            padding: 1rem 0;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            border: none;
+        }
+
+        .public-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.22);
+            color: #000000;
+            transform: translateY(-2px);
+            box-shadow: 
+                0 8px 30px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        }
+
+        .public-btn .icon {
+            margin-right: 10px;
+            font-size: 1.3rem;
+            opacity: 0.7;
+        }
+
+        .public-btn .desc {
+            display: block;
+            font-size: 0.6rem;
+            font-weight: 200;
+            color: rgba(0, 0, 0, 0.30);
+            margin-top: 2px;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 40px;
+            color: #000000;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.18);
+            color: #000000;
+            transform: translateX(-3px);
+        }
+
+        .footer {
+            color: #000000;
+            font-size: 0.6rem;
+            font-weight: 200;
+            letter-spacing: 1px;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding-top: 1rem;
+        }
+
+        /* ===== 磨砂弹窗 ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px) saturate(200%);
+            -webkit-backdrop-filter: blur(20px) saturate(200%);
+            border-radius: 40px;
+            padding: 2rem 1.8rem;
+            max-width: 440px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.20);
+            box-shadow: 
+                0 40px 80px -20px rgba(0, 0, 0, 0.20),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.10);
+            animation: slideUp 0.4s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-title {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.4rem;
+            font-weight: 200;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .modal-title .icon {
+            margin-right: 8px;
+        }
+
+        .modal-body {
+            color: #000000;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .modal-body .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .modal-body .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .modal-body .list-item .rank {
+            font-weight: 400;
+            color: rgba(0, 0, 0, 0.30);
+            min-width: 28px;
+        }
+
+        .modal-body .list-item .rank.gold { color: #b8860b; }
+        .modal-body .list-item .rank.silver { color: #888; }
+        .modal-body .list-item .rank.bronze { color: #cd7f32; }
+
+        .modal-body .list-item .info {
+            flex: 1;
+            margin: 0 12px;
+        }
+
+        .modal-body .list-item .info .name {
+            font-weight: 400;
+        }
+
+        .modal-body .list-item .info .detail {
+            font-size: 0.75rem;
+            color: rgba(0, 0, 0, 0.35);
+        }
+
+        .modal-body .list-item .amount {
+            font-weight: 400;
+            color: #00996b;
+        }
+
+        .modal-body .empty {
+            text-align: center;
+            color: rgba(0, 0, 0, 0.30);
+            padding: 24px 0;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-body .empty .icon {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .modal-close-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #000000;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            margin-top: 1rem;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.22);
+            transform: scale(1.02);
+        }
+
+        /* ===== 倒计时遮罩 ===== */
+        #expireOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.50);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        #expireOverlay.show {
+            display: flex;
+        }
+
+        .expire-box {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border-radius: 48px;
+            padding: 2.5rem 2.2rem;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 40px 80px -20px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.10);
+            text-align: center;
+            animation: slideUp 0.4s ease;
+        }
+
+        .expire-icon {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .expire-title {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .expire-body {
+            color: rgba(255, 255, 255, 0.60);
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .expire-countdown {
+            font-size: 3rem;
+            font-weight: 200;
+            color: rgba(255, 255, 255, 0.90);
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .expire-btn {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            border: none;
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(4px);
+            text-decoration: none;
+        }
+
+        .expire-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 480px) {
+            .public-container { padding: 1.5rem 1.2rem; }
+            .public-title { font-size: 1.6rem; }
+            .modal-box { padding: 1.5rem 1.2rem; }
+            .modal-title { font-size: 1.2rem; }
+            .modal-body { font-size: 0.8rem; }
+            .expire-box { padding: 2rem 1.5rem; }
+            .expire-countdown { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== 验证过期遮罩 ===== -->
+<div id="expireOverlay">
+    <div class="expire-box">
+        <div class="expire-icon">⏳</div>
+        <div class="expire-title">验证已过期</div>
+        <div class="expire-body">请重新验证后继续使用</div>
+        <div class="expire-countdown" id="countdownDisplay">5</div>
+        <a href="index.html" class="expire-btn" id="expireRedirectBtn">直接验证</a>
+    </div>
+</div>
+
+<!-- ===== 主内容 ===== -->
+<div id="mainContent">
+    <div class="public-container">
+        <div class="public-title">📊 项目公示</div>
+        <div class="public-sub">透明 · 公开 · 每一份善意都算数</div>
+
+        <button class="public-btn" id="sponsorBtn">
+            <span class="icon">🏆</span> 赞助月榜
+            <span class="desc">感谢每一位支持韵殷的朋友</span>
+        </button>
+
+        <button class="public-btn" id="donationBtn">
+            <span class="icon">❤️</span> 捐款记录
+            <span class="desc">每一份善意都流向需要的地方</span>
+        </button>
+
+        <a href="home.html" class="back-btn">← 返回菜单</a>
+
+        <div class="footer">© 2026 韵殷官方 · 用心分享，因你而在</div>
+    </div>
+</div>
+
+<!-- ===== 赞助月榜弹窗 ===== -->
+<div class="modal-overlay" id="sponsorModal">
+    <div class="modal-box">
+        <div class="modal-title"><span class="icon">🏆</span> 本月赞助榜</div>
+        <div class="modal-body" id="sponsorList">
+            <div class="empty"><span class="icon">⏳</span>加载中...</div>
+        </div>
+        <button class="modal-close-btn" id="closeSponsorBtn">关闭</button>
+    </div>
+</div>
+
+<!-- ===== 捐款记录弹窗 ===== -->
+<div class="modal-overlay" id="donationModal">
+    <div class="modal-box">
+        <div class="modal-title"><span class="icon">❤️</span> 捐款记录</div>
+        <div class="modal-body" id="donationList">
+            <div class="empty"><span class="icon">⏳</span>加载中...</div>
+        </div>
+        <button class="modal-close-btn" id="closeDonationBtn">关闭</button>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ============================================================
+        // 验证检查 + 过期倒计时遮罩
+        // ============================================================
+        const VERIFY_KEY = 'yunyao_verified';
+        const TIME_KEY = 'yunyao_verify_time';
+        const EXPIRE_HOURS = 24;
+        const EXPIRE_MS = EXPIRE_HOURS * 60 * 60 * 1000;
+
+        function isVerifiedValid() {
+            const verified = localStorage.getItem(VERIFY_KEY) === 'true';
+            const time = parseInt(localStorage.getItem(TIME_KEY) || '0');
+            const notExpired = (Date.now() - time) < EXPIRE_MS;
+            return verified && notExpired;
+        }
+
+        if (!isVerifiedValid()) {
+            if (localStorage.getItem(VERIFY_KEY) === 'true') {
+                localStorage.removeItem(VERIFY_KEY);
+                localStorage.removeItem(TIME_KEY);
+            }
+
+            const overlay = document.getElementById('expireOverlay');
+            const countdownDisplay = document.getElementById('countdownDisplay');
+            const redirectBtn = document.getElementById('expireRedirectBtn');
+            let countdown = 5;
+
+            overlay.classList.add('show');
+
+            const timer = setInterval(function() {
+                countdown -= 1;
+                countdownDisplay.textContent = countdown;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+
+            redirectBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                clearInterval(timer);
+                window.location.href = 'index.html';
+            });
+
+            document.body.style.overflow = 'hidden';
+            return;
+        }
+
+        document.getElementById('mainContent').style.display = 'block';
+        document.body.style.overflow = '';
+
+        // ============================================================
+        // 弹窗控制
+        // ============================================================
+        const sponsorModal = document.getElementById('sponsorModal');
+        const donationModal = document.getElementById('donationModal');
+        const sponsorBtn = document.getElementById('sponsorBtn');
+        const donationBtn = document.getElementById('donationBtn');
+        const closeSponsorBtn = document.getElementById('closeSponsorBtn');
+        const closeDonationBtn = document.getElementById('closeDonationBtn');
+
+        const sponsorList = document.getElementById('sponsorList');
+        const donationList = document.getElementById('donationList');
+
+        // ===== 打开赞助月榜 =====
+        sponsorBtn.addEventListener('click', function() {
+            sponsorModal.classList.add('show');
+            loadSponsors();
+        });
+
+        // ===== 打开捐款记录 =====
+        donationBtn.addEventListener('click', function() {
+            donationModal.classList.add('show');
+            loadDonations();
+        });
+
+        // ===== 关闭弹窗 =====
+        closeSponsorBtn.addEventListener('click', function() {
+            sponsorModal.classList.remove('show');
+        });
+
+        closeDonationBtn.addEventListener('click', function() {
+            donationModal.classList.remove('show');
+        });
+
+        // ===== 点击遮罩关闭 =====
+        sponsorModal.addEventListener('click', function(e) {
+            if (e.target === sponsorModal) {
+                sponsorModal.classList.remove('show');
+            }
+        });
+
+        donationModal.addEventListener('click', function(e) {
+            if (e.target === donationModal) {
+                donationModal.classList.remove('show');
+            }
+        });
+
+        // ============================================================
+        // 加载数据（适配空字段结构）
+        // ============================================================
+        function loadSponsors() {
+            sponsorList.innerHTML = '<div class="empty"><span class="icon">⏳</span>加载中...</div>';
+            fetch('data/sponsors.json?t=' + Date.now())
+                .then(res => {
+                    if (!res.ok) throw new Error('文件不存在');
+                    return res.json();
+                })
+                .then(data => {
+                    // 判断是否为空数据
+                    const isEmpty = !data || 
+                        (typeof data === 'object' && !Array.isArray(data) && 
+                        Object.values(data).every(v => v === '' || v === null || v === undefined));
+                    const isEmptyArray = Array.isArray(data) && data.length === 0;
+
+                    if (isEmpty || isEmptyArray) {
+                        sponsorList.innerHTML = '<div class="empty"><span class="icon">📭</span>数据正在累积中</div>';
+                        return;
+                    }
+
+                    const list = Array.isArray(data) ? data : [data];
+                    let html = '';
+                    let validCount = 0;
+                    list.forEach((item) => {
+                        if (!item.name && !item.amount) return;
+                        validCount++;
+                        let rankClass = '';
+                        let rankLabel = '';
+                        if (validCount === 1) { rankClass = 'gold'; rankLabel = '🥇'; }
+                        else if (validCount === 2) { rankClass = 'silver'; rankLabel = '🥈'; }
+                        else if (validCount === 3) { rankClass = 'bronze'; rankLabel = '🥉'; }
+                        else { rankLabel = '#' + validCount; }
+
+                        html += `
+                            <div class="list-item">
+                                <span class="rank ${rankClass}">${rankLabel}</span>
+                                <span class="info">
+                                    <span class="name">${escapeHtml(item.name)}</span>
+                                    ${item.date ? `<span class="detail">· ${escapeHtml(item.date)}</span>` : ''}
+                                </span>
+                                <span class="amount">${escapeHtml(item.amount)} 元</span>
+                            </div>
+                        `;
+                    });
+
+                    if (html === '') {
+                        sponsorList.innerHTML = '<div class="empty"><span class="icon">📭</span>数据正在累积中</div>';
+                    } else {
+                        sponsorList.innerHTML = html;
+                    }
+                })
+                .catch(() => {
+                    sponsorList.innerHTML = '<div class="empty"><span class="icon">⚠️</span>数据加载失败，请稍后重试</div>';
+                });
+        }
+
+        function loadDonations() {
+            donationList.innerHTML = '<div class="empty"><span class="icon">⏳</span>加载中...</div>';
+            fetch('data/donations.json?t=' + Date.now())
+                .then(res => {
+                    if (!res.ok) throw new Error('文件不存在');
+                    return res.json();
+                })
+                .then(data => {
+                    const isEmpty = !data || 
+                        (typeof data === 'object' && !Array.isArray(data) && 
+                        Object.values(data).every(v => v === '' || v === null || v === undefined));
+                    const isEmptyArray = Array.isArray(data) && data.length === 0;
+
+                    if (isEmpty || isEmptyArray) {
+                        donationList.innerHTML = '<div class="empty"><span class="icon">📭</span>数据正在累积中</div>';
+                        return;
+                    }
+
+                    const list = Array.isArray(data) ? data : [data];
+                    let html = '';
+                    let validCount = 0;
+                    list.forEach((item) => {
+                        if (!item.project && !item.amount) return;
+                        validCount++;
+                        html += `
+                            <div class="list-item">
+                                <span style="color:rgba(0,0,0,0.20); min-width:28px; font-weight:300;">#${validCount}</span>
+                                <span class="info">
+                                    <span class="name">${escapeHtml(item.project)}</span>
+                                    <span class="detail">${escapeHtml(item.date)} · ${escapeHtml(item.platform || '')}</span>
+                                </span>
+                                <span class="amount">${escapeHtml(item.amount)} 元</span>
+                            </div>
+                        `;
+                    });
+
+                    if (html === '') {
+                        donationList.innerHTML = '<div class="empty"><span class="icon">📭</span>数据正在累积中</div>';
+                    } else {
+                        donationList.innerHTML = html;
+                    }
+                })
+                .catch(() => {
+                    donationList.innerHTML = '<div class="empty"><span class="icon">⚠️</span>数据加载失败，请稍后重试</div>';
+                });
+        }
+
+        // ===== 防 XSS 转义 =====
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    })();
+</script>
+
+</body>
+</html>
