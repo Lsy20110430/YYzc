@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>韵殷 · 官网信息</title>
+    <title>韵殷 · 关于韵殷</title>
     <style>
         * {
             margin: 0;
@@ -88,66 +88,83 @@
             font-size: 1.6rem;
             font-weight: 200;
             letter-spacing: 1px;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             padding-left: 0.8rem;
             border-left: 2px solid rgba(255, 255, 255, 0.20);
             text-shadow: 0 2px 40px rgba(0, 0, 0, 0.02);
         }
 
-        .fee-card {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 1.2rem;
-            margin-top: 0.5rem;
-        }
-
-        .fee-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .fee-group-title {
-            color: #000000;
-            font-size: 1rem;
+        .section-title-sm {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1rem;
             font-weight: 300;
             letter-spacing: 0.5px;
+            margin-top: 0.5rem;
             margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            padding-left: 0.5rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.15);
         }
 
-        .fee-item {
+        .content-text {
+            color: #000000;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.9;
+            padding: 0 0.3rem;
+        }
+
+        .content-text p {
+            margin-bottom: 0.7rem;
+        }
+
+        .content-text .highlight {
+            color: #ff8a50;
+            font-weight: 400;
+        }
+
+        .content-text .highlight-green {
+            color: #00996b;
+            font-weight: 400;
+        }
+
+        .content-text .highlight-gold {
+            color: #b8860b;
+            font-weight: 400;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            margin-top: 0.3rem;
+        }
+
+        .info-card .row {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         }
 
-        .fee-item:last-child {
+        .info-card .row:last-child {
             border-bottom: none;
         }
 
-        .fee-type {
-            color: #000000;
+        .info-card .label {
+            color: rgba(0, 0, 0, 0.50);
             font-weight: 300;
         }
 
-        .fee-price {
+        .info-card .value {
             color: #000000;
             font-weight: 300;
-        }
-
-        .fee-note {
-            color: #000000;
-            font-size: 0.75rem;
-            font-weight: 200;
         }
 
         .rule-list {
             list-style: none;
-            margin: 0.5rem 0;
+            margin: 0.3rem 0;
         }
 
         .rule-list li {
@@ -157,28 +174,20 @@
             margin-bottom: 0.7rem;
             padding-left: 1.3rem;
             position: relative;
+            line-height: 1.6;
         }
 
         .rule-list li::before {
-            content: "🌸";
+            content: "•";
             position: absolute;
             left: 0;
-            color: rgba(0, 0, 0, 0.15);
-            font-size: 0.8rem;
+            color: rgba(0, 0, 0, 0.20);
+            font-size: 1rem;
         }
 
-        .penalty-list {
-            list-style: none;
-            margin: 0.5rem 0;
-        }
-
-        .penalty-list li {
-            color: #000000;
-            font-size: 0.9rem;
-            font-weight: 300;
-            margin-bottom: 0.7rem;
-            padding-left: 1.3rem;
-            position: relative;
+        .rule-list li strong {
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.80);
         }
 
         .badge {
@@ -188,7 +197,7 @@
             font-size: 0.65rem;
             font-weight: 600;
             letter-spacing: 0.5px;
-            margin-right: 0.7rem;
+            margin-right: 0.5rem;
             background: rgba(200, 30, 30, 0.12);
             color: #cc2233;
             border: 1px solid rgba(200, 30, 30, 0.20);
@@ -317,68 +326,151 @@
 
 <!-- ===== 主内容 ===== -->
 <div id="mainContent">
+    <!-- ===== 板块一：关于韵殷 ===== -->
     <div class="glass-block">
         <div class="back-bar">
             <a href="home.html" class="back-btn">← 返回菜单</a>
-            <span style="color:#000000; font-size:0.9rem;">📋 官网信息</span>
+            <span style="color:#000000; font-size:0.9rem;">🌸 关于韵殷</span>
         </div>
 
-        <div class="section-title">📤 上传费用说明</div>
-        <div style="background:rgba(255,255,255,0.06); border-radius:16px; padding:0.8rem 1rem; margin-bottom:1rem; border-left:2px solid rgba(0,0,0,0.06);">
-            <p style="color:#000000; font-size:0.9rem; font-weight:300;">💡 因为网址收费，所以上传需要一定费用。所有费用用于维持平台运营。</p>
-        </div>
-
-        <div class="fee-card">
-            <div class="fee-group">
-                <div class="fee-group-title">📦 永久保存</div>
-                <div class="fee-item">
-                    <span class="fee-type">1GB 以内</span>
-                    <span class="fee-price">1 元</span>
-                </div>
-                <div class="fee-item">
-                    <span class="fee-type">超过 1GB 的部分</span>
-                    <span class="fee-price">每 GB 0.5 元</span>
-                </div>
-                <div class="fee-note" style="margin-top:4px;">※ 不满 1GB 按 1GB 计算</div>
-            </div>
-
-            <div class="fee-group" style="margin-top:1.2rem; border-top:1px solid rgba(0,0,0,0.06); padding-top:1.2rem;">
-                <div class="fee-group-title">⏳ 临时保存（按月计费）</div>
-                <div class="fee-item">
-                    <span class="fee-type">1GB 以内</span>
-                    <span class="fee-price">1 元 / 月</span>
-                </div>
-                <div class="fee-item">
-                    <span class="fee-type">超过 1GB 的部分</span>
-                    <span class="fee-price">每 GB 0.5 元 / 月</span>
-                </div>
-                <div class="fee-note" style="margin-top:4px;">※ 不满 1GB 按 1GB 计算 · 不满一个月按一个月计算</div>
-            </div>
-        </div>
-
-        <div style="margin-top:1.5rem; text-align:center; font-size:0.8rem; font-weight:200; color:#000000;">
-            💰 所有收入用于服务器维护与公益项目支持
+        <div class="section-title">🌸 关于韵殷</div>
+        <div class="content-text">
+            <p>
+                <strong>韵殷 · 公益文件分享</strong> 是一个由个人发起、完全免费的公益资源分享平台。
+            </p>
+            <p>
+                我们致力于为中文互联网用户提供 <span class="highlight">安全、便捷、长期有效</span> 的软件下载导航服务。
+                所有资源均经过亲测，确保可用。
+            </p>
+            <p>
+                韵殷的运营模式为 <span class="highlight-green">纯公益</span>，<br>
+                不设付费墙，不强制收费，<br>
+                依靠用户自愿赞助维持长期运营。
+            </p>
         </div>
     </div>
 
+    <!-- ===== 板块二：关于赞助 ===== -->
+    <div class="glass-block">
+        <div class="section-title">💰 关于赞助</div>
+        <div class="content-text">
+            <p>
+                韵殷的运营需要服务器、域名和技术维护的支持。<br>
+                如果您愿意支持我们，每一份善意都会被认真对待。
+            </p>
+            <div class="info-card">
+                <div class="row">
+                    <span class="label">📊 赞助用途</span>
+                    <span class="value"><span class="highlight">50%</span> 网站运营 · <span class="highlight-green">50%</span> 公益捐款</span>
+                </div>
+                <div class="row">
+                    <span class="label">📅 公示周期</span>
+                    <span class="value">每季度末（3月/6月/9月/12月）</span>
+                </div>
+                <div class="row">
+                    <span class="label">📌 捐款方向</span>
+                    <span class="value">贫困学生 / 环保 / 动物保护</span>
+                </div>
+            </div>
+            <p style="font-size:0.85rem; color:rgba(0,0,0,0.40); margin-top:0.5rem;">
+                📊 每季度公开收支明细，让每一份善意都清晰可见。
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== 板块三：资源说明 ===== -->
+    <div class="glass-block">
+        <div class="section-title">📂 资源说明</div>
+        <div class="content-text">
+            <p>
+                • 所有文件均经过 <span class="highlight">亲测扫描</span>，确认可用<br>
+                • 部分文件来源于第三方下载站，链接由网友提供<br>
+                • 韵殷团队已自测，但 <span style="color:#cc2233; font-weight:400;">无法保证第三方后续是否篡改文件</span><br>
+                • 下载后请自行使用杀毒软件扫描，<span style="color:#cc2233; font-weight:400;">风险由用户自行承担</span>
+            </p>
+            <p style="font-size:0.85rem; color:rgba(0,0,0,0.40);">
+                📬 如发现文件异常，请立即通过 QQ群 / 频道 / 邮箱 反馈
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== 板块四：用户守则（新版） ===== -->
     <div class="glass-block">
         <div class="section-title">📜 用户守则</div>
         <ul class="rule-list">
-            <li>禁止传播任何违法、侵权、暴力、色情、赌博、恶意软件或钓鱼欺诈类文件。</li>
-            <li>禁止利用平台传播恶意代码、病毒、木马、勒索软件等破坏性内容。</li>
-            <li>商业传播必须如实声明文件属性，公益传播不得隐性收费。</li>
-            <li>用户应保证对所传播文件拥有合法权利，侵权责任由上传者自担。</li>
+            <li><strong>安全第一：</strong>所有分享链接须为官方或可信来源，禁止传播破解版、盗版、恶意篡改文件。</li>
+            <li><strong>合法合规：</strong>禁止传播色情、赌博、暴力、恶意软件、钓鱼链接等违法内容。</li>
+            <li><strong>尊重版权：</strong>分享的软件须为免费软件或已获授权，禁止传播侵权或破解类资源。</li>
+            <li><strong>如实描述：</strong>申请上传时须如实填写软件名称、用途、来源，不得夸大或虚假宣传。</li>
+            <li><strong>用户申请上传：</strong>用户可向开发者申请上传安全、合法的软件，经审核通过后收录。</li>
+            <li><strong>免责声明：</strong>韵殷仅提供导航链接，所有软件版权归原作者所有，使用风险由用户自行承担。</li>
         </ul>
 
-        <div class="section-title" style="margin-top:1.5rem;">⚖️ 违规处罚措施</div>
-        <ul class="penalty-list">
-            <li><span class="badge">一级违规</span> 轻度违规：删除内容 + 警告，限制部分功能3天。</li>
-            <li><span class="badge">二级违规</span> 中度违规：封禁15天，清除所有积分收益。</li>
-            <li><span class="badge">三级违规</span> 严重违规：永久封禁并移交有关部门。</li>
+        <!-- ===== 违规处罚措施（新版） ===== -->
+        <div class="section-title-sm" style="margin-top:1.5rem;">⚖️ 违规处罚措施</div>
+        <ul class="rule-list">
+            <li>
+                <span class="badge">一级违规</span> 
+                内容描述不符 / 链接失效未更新：<br>
+                <span style="color:rgba(0,0,0,0.50); font-size:0.85rem;">下架该链接 + 提醒上传者，3 天内未修正则永久移除。</span>
+            </li>
+            <li>
+                <span class="badge">二级违规</span> 
+                链接含轻微广告 / 诱导下载 / 捆绑安装：<br>
+                <span style="color:rgba(0,0,0,0.50); font-size:0.85rem;">立即下架 + 警告上传者，限制上传权限 15 天。</span>
+            </li>
+            <li>
+                <span class="badge">三级违规</span> 
+                传播病毒 / 恶意软件 / 盗版侵权 / 违法内容：<br>
+                <span style="color:rgba(0,0,0,0.50); font-size:0.85rem;">永久封禁 + 删除所有内容 + 保留追究法律责任的权利。</span>
+            </li>
         </ul>
     </div>
 
-    <div class="footer">© 2026 韵殷官方 · 联系方式: ruinwisp@outlook.com</div>
+    <!-- ===== 板块五：免责声明（升级版） ===== -->
+    <div class="glass-block">
+        <div class="section-title">⚡ 免责声明</div>
+        <div class="content-text">
+            <p>1. 韵殷 · 公益文件分享平台所收录的资源均来源于 <span class="highlight">网络公开渠道</span>，所有资源仅供 <span class="highlight-green">学习交流</span> 使用，请于下载后 24 小时内删除。</p>
+            <p>2. 本站所有软件链接均来自第三方网盘或下载站，韵殷团队仅提供导航服务，不托管任何文件，不对链接的长期有效性及安全性作任何保证。</p>
+            <p>3. 用户通过本站申请上传的软件，其合法性及版权归属由上传者自行负责，韵殷不对用户上传内容的合法性承担连带责任。</p>
+            <p>4. 本站所有软件描述、版本号、截图等信息仅供参考，请以软件官方发布的信息为准。</p>
+            <p>5. 用户下载并使用软件所产生的任何后果（包括但不限于设备损坏、数据丢失等），均由用户自行承担，韵殷不承担任何责任。</p>
+            <p>6. 本站服务可能因维护、服务器故障、域名解析等原因暂时中断，韵殷不承诺服务的永久可用性。</p>
+            <p style="font-size:0.85rem; color:rgba(0,0,0,0.40); margin-top:0.5rem;">
+                📧 如果您是版权所有者，请通过 <strong>ruinwisp@outlook.com</strong> 与我们沟通，我们会在收到通知后第一时间核实并处理。
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== 板块六：联系方式 ===== -->
+    <div class="glass-block">
+        <div class="section-title">📬 联系方式</div>
+        <div class="content-text">
+            <p>
+                如果您有任何问题、建议或反馈，欢迎通过以下方式联系我们：
+            </p>
+            <div class="info-card">
+                <div class="row">
+                    <span class="label">📱 QQ群</span>
+                    <span class="value">454493903</span>
+                </div>
+                <div class="row">
+                    <span class="label">📢 Q频道</span>
+                    <span class="value">pd75072875</span>
+                </div>
+                <div class="row">
+                    <span class="label">📧 邮箱</span>
+                    <span class="value">ruinwisp@outlook.com</span>
+                </div>
+            </div>
+            <p style="font-size:0.85rem; color:rgba(0,0,0,0.40); margin-top:0.5rem;">
+                ⚡ 您的反馈让韵殷变得更好
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">© 2026 韵殷官方 · 用心分享，因你而在</div>
 </div>
 
 <script>
