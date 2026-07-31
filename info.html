@@ -15,10 +15,9 @@
         @media (min-width: 768px) { html { font-size: 16px; } }
 
         body {
-            background: #1a1625 url("https://pic1.imgdb.cn/item/69622b91bec004ac7e59a4da.png") no-repeat center center fixed;
+            background: #e8e6ed url("https://picui.ogmua.cn/s1/2026/07/31/6a6c81f424ff0.webp") no-repeat center center fixed;
             background-size: cover;
             font-family: "Microsoft YaHei", "Heiti SC", "Segoe UI", system-ui, sans-serif;
-            color: #eae6f2;
             padding: 30px 0;
             min-height: 100vh;
         }
@@ -30,20 +29,31 @@
             padding: 0 20px;
         }
 
+        /* ===== 大框：高透明度玻璃感 ===== */
         .glass-block {
-            background: rgba(30, 26, 42, 0.65);
-            backdrop-filter: blur(16px);
-            border-radius: 32px;
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: saturate(150%);
+            -webkit-backdrop-filter: saturate(150%);
+            border-radius: 48px;
             padding: 2rem 1.8rem;
-            border: 2px solid rgba(250, 204, 212, 0.45);
-            box-shadow: 0 12px 28px rgba(255, 138, 174, 0.15);
-            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            box-shadow: 
+                0 40px 80px -30px rgba(0, 0, 0, 0.10),
+                inset 0 1px 0 rgba(255, 255, 255, 1.0),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+                0 0 0 1px rgba(255, 255, 255, 0.18);
+            transition: all 0.4s ease;
             margin-bottom: 1.5rem;
         }
 
         .glass-block:hover {
-            border-color: rgba(255, 138, 174, 0.7);
-            box-shadow: 0 16px 32px rgba(255, 138, 174, 0.25);
+            background: rgba(255, 255, 255, 0.32);
+            border-color: rgba(255, 255, 255, 0.40);
+            box-shadow: 
+                0 50px 100px -30px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 1.0),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.40),
+                0 0 0 1px rgba(255, 255, 255, 0.25);
         }
 
         .back-bar {
@@ -54,35 +64,40 @@
         }
 
         .back-btn {
-            background: rgba(255, 138, 174, 0.2);
-            border: 2px solid rgba(255, 138, 174, 0.5);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.10);
             border-radius: 40px;
-            color: #ff8aae;
+            color: #000000;
             padding: 0.4rem 1.2rem;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
         }
 
         .back-btn:hover {
-            background: rgba(255, 138, 174, 0.35);
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.18);
+            color: #000000;
             transform: translateX(-3px);
         }
 
         .section-title {
-            font-size: 1.7rem;
-            font-weight: 700;
-            color: #ff8aae;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.6rem;
+            font-weight: 200;
+            letter-spacing: 1px;
             margin-bottom: 1.2rem;
             padding-left: 0.8rem;
-            border-left: 5px solid #ff8aae;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            border-left: 2px solid rgba(255, 255, 255, 0.20);
+            text-shadow: 0 2px 40px rgba(0, 0, 0, 0.02);
         }
 
         .fee-card {
-            background: rgba(255,255,245,0.06);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             padding: 1.2rem;
             margin-top: 0.5rem;
@@ -93,9 +108,10 @@
         }
 
         .fee-group-title {
-            color: #ffb8cf;
-            font-size: 1.1rem;
-            font-weight: 700;
+            color: #000000;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
@@ -106,8 +122,8 @@
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            padding: 0.6rem 0;
-            border-bottom: 1px solid rgba(255,200,210,0.2);
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
         }
 
         .fee-item:last-child {
@@ -115,18 +131,19 @@
         }
 
         .fee-type {
-            font-weight: 600;
-            color: #eae6f2;
+            color: #000000;
+            font-weight: 300;
         }
 
         .fee-price {
-            color: #ff8aae;
-            font-weight: 700;
+            color: #000000;
+            font-weight: 300;
         }
 
         .fee-note {
-            color: #a89bb8;
-            font-size: 0.8rem;
+            color: #000000;
+            font-size: 0.75rem;
+            font-weight: 200;
         }
 
         .rule-list {
@@ -135,18 +152,20 @@
         }
 
         .rule-list li {
+            color: #000000;
+            font-size: 0.9rem;
+            font-weight: 300;
             margin-bottom: 0.7rem;
             padding-left: 1.3rem;
             position: relative;
-            color: #f0e6fa;
-            font-size: 0.95rem;
         }
 
         .rule-list li::before {
             content: "🌸";
             position: absolute;
             left: 0;
-            color: #ff8aae;
+            color: rgba(0, 0, 0, 0.15);
+            font-size: 0.8rem;
         }
 
         .penalty-list {
@@ -155,37 +174,39 @@
         }
 
         .penalty-list li {
+            color: #000000;
+            font-size: 0.9rem;
+            font-weight: 300;
             margin-bottom: 0.7rem;
             padding-left: 1.3rem;
             position: relative;
-            color: #f0e6fa;
-            font-size: 0.95rem;
         }
 
         .badge {
             display: inline-block;
-            background: rgba(255, 138, 174, 0.3);
-            backdrop-filter: blur(2px);
-            padding: 0.2rem 0.8rem;
+            padding: 0.15rem 0.7rem;
             border-radius: 40px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
+            letter-spacing: 0.5px;
             margin-right: 0.7rem;
-            color: #ffc0d0;
-            border: 1px solid rgba(255,138,174,0.6);
+            background: rgba(200, 30, 30, 0.12);
+            color: #cc2233;
+            border: 1px solid rgba(200, 30, 30, 0.20);
         }
 
         .footer {
+            color: #000000;
+            font-size: 0.6rem;
+            font-weight: 200;
+            letter-spacing: 1px;
             text-align: center;
-            font-size: 0.7rem;
-            opacity: 0.8;
             margin-top: 1rem;
-            color: #8a7e9e;
         }
 
         @media (max-width: 640px) {
             .glass-block { padding: 1.5rem; }
-            .section-title { font-size: 1.4rem; }
+            .section-title { font-size: 1.3rem; }
             #mainContent { padding: 0 12px; }
         }
     </style>
@@ -196,12 +217,12 @@
     <div class="glass-block">
         <div class="back-bar">
             <a href="home.html" class="back-btn">← 返回菜单</a>
-            <span style="color:#cdc2e6; font-size:0.9rem;">📋 官网信息</span>
+            <span style="color:#000000; font-size:0.9rem;">📋 官网信息</span>
         </div>
 
         <div class="section-title">📤 上传费用说明</div>
-        <div style="background:rgba(255,138,174,0.1); border-radius:16px; padding:0.8rem 1rem; margin-bottom:1rem; border-left:4px solid #ff8aae;">
-            <p style="color:#f0e6fa; font-size:0.95rem;">💡 因为网址收费，所以上传需要一定费用。所有费用用于维持平台运营。</p>
+        <div style="background:rgba(255,255,255,0.06); border-radius:16px; padding:0.8rem 1rem; margin-bottom:1rem; border-left:2px solid rgba(0,0,0,0.06);">
+            <p style="color:#000000; font-size:0.9rem; font-weight:300;">💡 因为网址收费，所以上传需要一定费用。所有费用用于维持平台运营。</p>
         </div>
 
         <div class="fee-card">
@@ -218,7 +239,7 @@
                 <div class="fee-note" style="margin-top:4px;">※ 不满 1GB 按 1GB 计算</div>
             </div>
 
-            <div class="fee-group" style="margin-top:1.2rem; border-top:1px solid rgba(255,200,210,0.2); padding-top:1.2rem;">
+            <div class="fee-group" style="margin-top:1.2rem; border-top:1px solid rgba(0,0,0,0.06); padding-top:1.2rem;">
                 <div class="fee-group-title">⏳ 临时保存（按月计费）</div>
                 <div class="fee-item">
                     <span class="fee-type">1GB 以内</span>
@@ -232,7 +253,7 @@
             </div>
         </div>
 
-        <div style="margin-top:1.5rem; text-align:center; font-size:0.85rem; color:#a89bb8;">
+        <div style="margin-top:1.5rem; text-align:center; font-size:0.8rem; font-weight:200; color:#000000;">
             💰 所有收入用于服务器维护与公益项目支持
         </div>
     </div>

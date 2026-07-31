@@ -15,10 +15,9 @@
         @media (min-width: 768px) { html { font-size: 16px; } }
 
         body {
-            background: #1a1625 url("https://pic1.imgdb.cn/item/69622b91bec004ac7e59a4da.png") no-repeat center center fixed;
+            background: #e8e6ed url("https://picui.ogmua.cn/s1/2026/07/31/6a6c81f424ff0.webp") no-repeat center center fixed;
             background-size: cover;
             font-family: "Microsoft YaHei", "Heiti SC", "Segoe UI", system-ui, sans-serif;
-            color: #eae6f2;
             padding: 30px 0;
             min-height: 100vh;
         }
@@ -30,19 +29,30 @@
             padding: 0 20px;
         }
 
+        /* ===== 大框：高透明度玻璃感 ===== */
         .glass-block {
-            background: rgba(30, 26, 42, 0.65);
-            backdrop-filter: blur(16px);
-            border-radius: 32px;
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: saturate(150%);
+            -webkit-backdrop-filter: saturate(150%);
+            border-radius: 48px;
             padding: 2rem 1.8rem;
-            border: 2px solid rgba(250, 204, 212, 0.45);
-            box-shadow: 0 12px 28px rgba(255, 138, 174, 0.15);
-            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            box-shadow: 
+                0 40px 80px -30px rgba(0, 0, 0, 0.10),
+                inset 0 1px 0 rgba(255, 255, 255, 1.0),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+                0 0 0 1px rgba(255, 255, 255, 0.18);
+            transition: all 0.4s ease;
         }
 
         .glass-block:hover {
-            border-color: rgba(255, 138, 174, 0.7);
-            box-shadow: 0 16px 32px rgba(255, 138, 174, 0.25);
+            background: rgba(255, 255, 255, 0.32);
+            border-color: rgba(255, 255, 255, 0.40);
+            box-shadow: 
+                0 50px 100px -30px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 1.0),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.40),
+                0 0 0 1px rgba(255, 255, 255, 0.25);
         }
 
         .back-bar {
@@ -54,31 +64,35 @@
         }
 
         .back-btn {
-            background: rgba(255, 138, 174, 0.2);
-            border: 2px solid rgba(255, 138, 174, 0.5);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.10);
             border-radius: 40px;
-            color: #ff8aae;
+            color: #000000;
             padding: 0.4rem 1.2rem;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
         }
 
         .back-btn:hover {
-            background: rgba(255, 138, 174, 0.35);
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.18);
+            color: #000000;
             transform: translateX(-3px);
         }
 
         .section-title {
-            font-size: 1.7rem;
-            font-weight: 700;
-            color: #ff8aae;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.6rem;
+            font-weight: 200;
+            letter-spacing: 1px;
             margin-bottom: 1.2rem;
             padding-left: 0.8rem;
-            border-left: 5px solid #ff8aae;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            border-left: 2px solid rgba(255, 255, 255, 0.20);
+            text-shadow: 0 2px 40px rgba(0, 0, 0, 0.02);
         }
 
         .search-wrapper {
@@ -90,57 +104,59 @@
         }
 
         .search-box {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 40px;
             flex: 1;
             min-width: 200px;
             position: relative;
             display: flex;
             align-items: center;
-            background: rgba(255,255,255,0.10);
-            border: 2px solid rgba(255,200,210,0.4);
-            border-radius: 40px;
             transition: all 0.3s;
         }
 
         .search-box:focus-within {
-            border-color: #ff8aae;
-            background: rgba(30,20,45,0.6);
-            box-shadow: 0 0 0 3px rgba(255, 138, 174, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.14);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.04);
         }
 
         .search-icon {
+            color: #000000;
             padding: 0 12px 0 16px;
-            color: #a89bb8;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .search-box input {
+            color: #000000;
+            background: transparent;
+            border: none;
             flex: 1;
             padding: 10px 10px 10px 0;
-            border: none;
-            background: transparent;
             font-size: 15px;
+            font-weight: 300;
             outline: none;
-            color: #eae6f2;
             min-width: 80px;
         }
 
         .search-box input::placeholder {
-            color: #8a7e9e;
+            color: rgba(0, 0, 0, 0.30);
+            font-weight: 200;
         }
 
         .search-clear {
-            padding: 0 14px;
             background: none;
             border: none;
-            color: #a89bb8;
+            color: #000000;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;
+            padding: 0 14px;
             transition: color 0.2s;
             display: none;
         }
 
         .search-clear:hover {
-            color: #ff6b6b;
+            color: #000000;
         }
 
         .search-box input:not(:placeholder-shown) ~ .search-clear {
@@ -148,42 +164,45 @@
         }
 
         .search-hint {
-            font-size: 13px;
-            color: #8a7e9e;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 200;
             white-space: nowrap;
         }
 
         .file-list {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         .file-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            color: #000000;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 12px 18px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
             text-decoration: none;
-            color: #eae6f2;
-            border: 1px solid rgba(255,200,210,0.15);
         }
 
         .file-item:hover {
-            background: rgba(255,255,255,0.10);
-            border-color: rgba(255,138,174,0.4);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.14);
+            color: #000000;
             transform: translateX(4px);
         }
 
         .file-name {
-            font-weight: 500;
+            font-weight: 300;
             display: flex;
             align-items: center;
             gap: 10px;
             word-break: break-word;
+            letter-spacing: 0.3px;
         }
 
         .file-meta {
@@ -194,83 +213,89 @@
         }
 
         .file-size {
-            color: #a89bb8;
-            font-size: 13px;
-            background: rgba(255,255,255,0.06);
+            color: #000000;
+            font-size: 12px;
+            font-weight: 200;
+            background: rgba(255, 255, 255, 0.04);
             padding: 2px 12px;
             border-radius: 12px;
         }
 
         .file-date {
-            color: #8a7e9e;
-            font-size: 13px;
+            color: #000000;
+            font-size: 12px;
+            font-weight: 200;
         }
 
         .highlight {
-            background: #fefcbf;
-            color: #1a1625;
+            background: rgba(0, 0, 0, 0.08);
+            color: #000000;
             padding: 0 4px;
             border-radius: 3px;
-            font-weight: 600;
+            font-weight: 400;
         }
 
         .empty {
+            color: #000000;
+            font-weight: 200;
             text-align: center;
             padding: 40px 20px;
-            color: #8a7e9e;
         }
 
         .pagination {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             margin-top: 20px;
             padding-top: 16px;
-            border-top: 1px solid rgba(255,200,210,0.2);
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
             flex-wrap: wrap;
         }
 
         .page-btn {
-            min-width: 36px;
-            height: 36px;
-            padding: 0 10px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,200,210,0.2);
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            color: #000000;
+            min-width: 34px;
+            height: 34px;
+            padding: 0 8px;
+            font-size: 13px;
+            font-weight: 300;
             cursor: pointer;
-            transition: all 0.2s;
-            font-size: 14px;
-            color: #eae6f2;
+            transition: all 0.25s;
         }
 
         .page-btn:hover:not(:disabled) {
-            background: rgba(255,138,174,0.2);
-            border-color: #ff8aae;
+            background: rgba(255, 255, 255, 0.10);
+            border-color: rgba(255, 255, 255, 0.14);
+            color: #000000;
         }
 
         .page-btn.active {
-            background: #ff8aae;
-            color: #1a1625;
-            border-color: #ff8aae;
+            background: rgba(255, 255, 255, 0.14);
+            color: #000000;
+            border-color: rgba(255, 255, 255, 0.18);
         }
 
         .page-btn:disabled {
-            opacity: 0.3;
+            opacity: 0.2;
             cursor: not-allowed;
         }
 
         .page-dots {
+            color: #000000;
             padding: 0 4px;
-            color: #8a7e9e;
         }
 
         .footer {
+            color: #000000;
+            font-size: 0.6rem;
+            font-weight: 200;
+            letter-spacing: 1px;
             text-align: center;
-            font-size: 0.7rem;
-            opacity: 0.8;
             margin-top: 1rem;
-            color: #8a7e9e;
         }
 
         @media (max-width: 640px) {
@@ -279,7 +304,7 @@
             .file-item { flex-wrap: wrap; gap: 6px; }
             .file-meta { flex-wrap: wrap; gap: 6px; }
             .search-wrapper { flex-direction: column; align-items: stretch; }
-            .search-hint { text-align: center; font-size: 12px; }
+            .search-hint { text-align: center; font-size: 11px; }
             .back-bar { gap: 0.5rem; }
             #mainContent { padding: 0 12px; }
         }
@@ -291,8 +316,8 @@
     <div class="glass-block">
         <div class="back-bar">
             <a href="home.html" class="back-btn">← 返回菜单</a>
-            <span style="color:#cdc2e6; font-size:0.9rem;">📂 文件分享</span>
-            <span style="margin-left:auto; font-size:0.7rem; color:#8a7e9e;" id="fileCount">加载中...</span>
+            <span style="color:#000000; font-size:0.9rem;">📂 文件分享</span>
+            <span style="margin-left:auto; font-size:0.7rem; color:#000000;" id="fileCount">加载中...</span>
         </div>
 
         <div class="search-wrapper">
@@ -315,9 +340,6 @@
 </div>
 
 <script>
-    // ============================================================
-    // 验证检查（使用 localStorage，有效期 24 小时）
-    // ============================================================
     (function() {
         const VERIFY_KEY = 'yunyao_verified';
         const TIME_KEY = 'yunyao_verify_time';
@@ -343,9 +365,6 @@
         document.getElementById('mainContent').style.display = 'block';
     })();
 
-    // ============================================================
-    // 文件列表功能（从 data/files.json 加载）
-    // ============================================================
     const PER_PAGE = 20;
     let allFiles = [];
     let filteredFiles = [];
@@ -371,7 +390,7 @@
             fileList.innerHTML = `
                 <div class="empty">
                     ⚠️ 数据文件加载失败，请确保 data/files.json 存在
-                    <br><span style="font-size:0.8rem;color:#8a7e9e;">${e.message}</span>
+                    <br><span style="font-size:0.8rem;color:#000000;">${e.message}</span>
                 </div>
             `;
             return;

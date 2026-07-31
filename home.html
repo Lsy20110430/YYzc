@@ -15,10 +15,9 @@
         @media (min-width: 768px) { html { font-size: 16px; } }
 
         body {
-            background: #1a1625 url("https://pic1.imgdb.cn/item/69622b91bec004ac7e59a4da.png") no-repeat center center fixed;
+            background: #e8e6ed url("https://picui.ogmua.cn/s1/2026/07/31/6a6c81f424ff0.webp") no-repeat center center fixed;
             background-size: cover;
             font-family: "Microsoft YaHei", "Heiti SC", "Segoe UI", system-ui, sans-serif;
-            color: #eae6f2;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -32,90 +31,114 @@
             max-width: 500px;
         }
 
+        /* ===== 大框：高透明度玻璃感（无模糊） ===== */
         .menu-container {
-            width: 100%;
-            background: rgba(30, 26, 42, 0.70);
-            backdrop-filter: blur(16px);
-            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: saturate(150%);
+            -webkit-backdrop-filter: saturate(150%);
+            border-radius: 56px;
             padding: 2.5rem 2rem;
-            border: 2px solid rgba(250, 204, 212, 0.45);
-            box-shadow: 0 12px 28px rgba(255, 138, 174, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            box-shadow: 
+                0 40px 80px -30px rgba(0, 0, 0, 0.10),
+                inset 0 1px 0 rgba(255, 255, 255, 1.0),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+                0 0 0 1px rgba(255, 255, 255, 0.18);
             text-align: center;
+            transition: all 0.4s ease;
         }
 
         .menu-container:hover {
-            border-color: rgba(255, 138, 174, 0.7);
-            box-shadow: 0 16px 32px rgba(255, 138, 174, 0.25);
+            background: rgba(255, 255, 255, 0.32);
+            border-color: rgba(255, 255, 255, 0.40);
+            box-shadow: 
+                0 50px 100px -30px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 1.0),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.40),
+                0 0 0 1px rgba(255, 255, 255, 0.25);
         }
 
         .menu-title {
+            color: rgba(255, 255, 255, 0.95);
             font-size: 2.2rem;
-            font-weight: 700;
-            color: #ff8aae;
-            text-shadow: 0 2px 8px rgba(255, 138, 174, 0.3);
+            font-weight: 200;
+            letter-spacing: 2px;
             margin-bottom: 0.5rem;
+            text-shadow: 0 2px 40px rgba(0, 0, 0, 0.03);
         }
 
         .menu-sub {
-            color: #cdc2e6;
-            font-size: 0.95rem;
+            color: #000000;
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 1px;
             margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(255,200,210,0.2);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
             padding-bottom: 1.2rem;
         }
 
         .menu-btn {
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 60px;
+            color: #000000;
             display: block;
             width: 100%;
             padding: 1rem 0;
             margin-bottom: 0.8rem;
-            background: rgba(255, 138, 174, 0.15);
-            border: 2px solid rgba(255, 138, 174, 0.4);
-            border-radius: 60px;
-            color: #eae6f2;
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: 300;
+            letter-spacing: 0.5px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             text-decoration: none;
             text-align: center;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.30);
         }
 
         .menu-btn:hover {
-            background: rgba(255, 138, 174, 0.30);
-            border-color: #ff8aae;
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.28);
+            color: #000000;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 138, 174, 0.25);
-        }
-
-        .menu-btn:active {
-            transform: translateY(1px);
+            box-shadow: 
+                0 8px 30px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.40);
         }
 
         .menu-btn .icon {
             margin-right: 10px;
             font-size: 1.3rem;
+            opacity: 0.7;
         }
 
         .menu-btn .desc {
+            color: #000000;
             display: block;
-            font-size: 0.7rem;
-            font-weight: 400;
-            color: #a89bb8;
+            font-size: 0.65rem;
+            font-weight: 200;
+            letter-spacing: 0.5px;
             margin-top: 2px;
         }
 
         .footer {
+            color: #000000;
+            font-size: 0.6rem;
+            font-weight: 200;
+            letter-spacing: 1px;
             margin-top: 1.5rem;
-            font-size: 0.65rem;
-            color: #8a7e9e;
-            border-top: 1px solid rgba(255,200,210,0.15);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
             padding-top: 1rem;
         }
 
         .footer a {
-            color: #ff8aae;
+            color: #000000;
             text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #000000;
         }
     </style>
 </head>
@@ -149,7 +172,6 @@
 
 <script>
     (function() {
-        // ===== 验证状态管理 =====
         const VERIFY_KEY = 'yunyao_verified';
         const TIME_KEY = 'yunyao_verify_time';
         const EXPIRE_HOURS = 24;

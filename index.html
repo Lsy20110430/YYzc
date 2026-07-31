@@ -13,7 +13,7 @@
     }
 
     body {
-      background: #1a1625 url("https://pic1.imgdb.cn/item/69622b91bec004ac7e59a4da.png") no-repeat center center fixed;
+      background: #e8e6ed url("https://picui.ogmua.cn/s1/2026/07/31/6a6c81f424ff0.webp") no-repeat center center fixed;
       background-size: cover;
       min-height: 100vh;
       display: flex;
@@ -22,66 +22,71 @@
       padding: 1.5rem;
     }
 
+    /* ===== 大框：高透明度玻璃感 ===== */
     .card {
-      background: rgba(30, 26, 42, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 48px;
-      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5),
-                  inset 0 1px 2px rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: saturate(150%);
+      -webkit-backdrop-filter: saturate(150%);
+      border-radius: 56px;
+      box-shadow: 
+        0 40px 80px -30px rgba(0, 0, 0, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 1.0),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+        0 0 0 1px rgba(255, 255, 255, 0.18);
       width: 100%;
       max-width: 440px;
       padding: 2.5rem 2.2rem;
-      transition: transform 0.2s ease;
-      border: 2px solid rgba(250, 204, 212, 0.45);
-      text-align: center;
+      transition: all 0.4s ease;
     }
 
     .card:hover {
-      border-color: rgba(255, 138, 174, 0.7);
-      box-shadow: 0 16px 32px rgba(255, 138, 174, 0.25);
+      background: rgba(255, 255, 255, 0.32);
+      box-shadow: 
+        0 50px 100px -30px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 1.0),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.40),
+        0 0 0 1px rgba(255, 255, 255, 0.25);
     }
 
     h1 {
+      color: rgba(255, 255, 255, 0.95);
       font-size: 2.2rem;
-      font-weight: 700;
+      font-weight: 300;
       letter-spacing: -0.02em;
-      color: #ff8aae;
       margin-bottom: 0.3rem;
-      text-shadow: 0 2px 8px rgba(255, 138, 174, 0.3);
+      text-shadow: 0 2px 40px rgba(0, 0, 0, 0.05);
     }
 
     .subhead {
-      color: #cdc2e6;
+      color: #000000;
       font-size: 0.95rem;
-      margin-bottom: 2rem;
-      border-left: 3px solid #ff8aae;
+      margin-bottom: 2.2rem;
+      border-left: 2px solid rgba(0, 0, 0, 0.15);
       padding-left: 0.75rem;
-      font-weight: 400;
+      font-weight: 300;
       text-align: left;
     }
 
-    .captcha-section {
-      margin-top: 0.5rem;
-    }
-
     .captcha-section .captcha-sub {
-      color: #cdc2e6;
-      font-size: 0.9rem;
+      color: #000000;
+      font-size: 0.85rem;
+      font-weight: 300;
       margin-bottom: 1.5rem;
+      letter-spacing: 0.3px;
     }
 
     .captcha-track {
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 60px;
+      height: 48px;
       position: relative;
       width: 100%;
-      height: 52px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 60px;
       overflow: hidden;
-      border: 1px solid rgba(255,200,210,0.3);
       user-select: none;
       touch-action: none;
       cursor: grab;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.02);
     }
 
     .captcha-track:active {
@@ -89,61 +94,58 @@
     }
 
     .captcha-track .captcha-bg {
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #ff8aae, #c89eff);
+      background: rgba(255, 255, 255, 0.20);
       border-radius: 60px;
-      transition: width 0.05s linear;
+      height: 100%;
+      left: 0;
       pointer-events: none;
+      position: absolute;
+      top: 0;
+      transition: width 0.05s linear;
+      width: 0%;
+      box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.20);
     }
 
     .captcha-track .captcha-thumb {
-      position: absolute;
+      background: rgba(255, 255, 255, 0.80);
+      border: 1px solid rgba(255, 255, 255, 0.30);
+      border-radius: 50%;
+      height: 44px;
       left: 0;
+      pointer-events: none;
+      position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
-      background: rgba(255,255,255,0.95);
-      border-radius: 50%;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      transition: left 0.05s linear;
+      width: 44px;
+      box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
-      color: #ff8aae;
-      transition: left 0.05s linear;
-      pointer-events: none;
-      border: 2px solid rgba(255, 138, 174, 0.3);
     }
 
     .captcha-track .captcha-thumb svg {
-      width: 22px;
-      height: 22px;
-      fill: none;
-      stroke: #ff8aae;
-      stroke-width: 2.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      stroke: rgba(0, 0, 0, 0.4);
     }
 
     .captcha-status {
-      text-align: center;
+      color: #000000;
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 0.5px;
       margin-top: 1rem;
-      font-size: 0.85rem;
-      color: #cdc2e6;
       min-height: 1.6rem;
+      text-align: center;
     }
 
     .captcha-status.success {
-      color: #6fcf97;
+      color: #000000;
     }
 
     .captcha-status.error {
-      color: #f28b8b;
+      color: #cc2233;
     }
 
     .captcha-actions {
@@ -152,69 +154,87 @@
       margin-top: 1.2rem;
     }
 
-    .captcha-actions button {
+    .captcha-actions .btn-captcha-confirm {
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #000000;
+      backdrop-filter: blur(4px);
+      box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.02),
+        inset 0 1px 0 rgba(255, 255, 255, 0.30);
       flex: 1;
       border: none;
       padding: 0.7rem;
       border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.95rem;
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
       cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .captcha-actions .btn-captcha-confirm {
-      background: linear-gradient(135deg, #ff8aae, #c89eff);
-      color: white;
-      box-shadow: 0 4px 12px rgba(255, 138, 174, 0.3);
+      transition: all 0.3s ease;
     }
 
     .captcha-actions .btn-captcha-confirm:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.22);
+      color: #000000;
       transform: scale(1.02);
-      box-shadow: 0 8px 20px rgba(255, 138, 174, 0.4);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.40);
     }
 
     .captcha-actions .btn-captcha-confirm:disabled {
-      opacity: 0.5;
+      opacity: 0.3;
       cursor: not-allowed;
       transform: none;
     }
 
     .captcha-actions .btn-captcha-cancel {
-      background: rgba(255,255,255,0.08);
-      color: #cdc2e6;
-      border: 1px solid rgba(255,200,210,0.2);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #000000;
+      backdrop-filter: blur(4px);
+      flex: 1;
+      border: none;
+      padding: 0.7rem;
+      border-radius: 40px;
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
     .captcha-actions .btn-captcha-cancel:hover {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255, 255, 255, 0.12);
+      color: #000000;
     }
 
     .message-box {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 40px;
+      color: #000000;
+      backdrop-filter: blur(4px);
       margin: 1.2rem 0 0.5rem;
       padding: 0.7rem 1rem;
-      border-radius: 40px;
-      font-size: 0.9rem;
-      font-weight: 500;
+      font-size: 0.85rem;
+      font-weight: 300;
       text-align: center;
       min-height: 3.2rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid transparent;
-      transition: 0.2s;
+      transition: 0.3s;
     }
 
     .message-box.success {
-      background: rgba(46, 125, 100, 0.3);
-      border-color: #2e7d64;
-      color: #e0ffe8;
+      background: rgba(255, 255, 255, 0.10);
+      border-color: rgba(255, 255, 255, 0.16);
+      color: #000000;
     }
 
     .message-box.error {
-      background: rgba(179, 59, 59, 0.3);
-      border-color: #b33b3b;
-      color: #ffe0e0;
+      background: rgba(255, 200, 200, 0.06);
+      border-color: rgba(255, 200, 200, 0.10);
+      color: #cc2233;
     }
 
     .hidden {
@@ -262,7 +282,6 @@
 
     const REDIRECT_URL = "home.html";
 
-    // ===== 验证状态管理 =====
     const VERIFY_KEY = 'yunyao_verified';
     const TIME_KEY = 'yunyao_verify_time';
     const EXPIRE_HOURS = 24;
@@ -275,19 +294,16 @@
       return verified && notExpired;
     }
 
-    // 如果已经验证过且未过期，直接跳转
     if (isVerifiedValid()) {
       window.location.href = REDIRECT_URL;
       return;
     }
 
-    // 如果已过期，清除旧数据
     if (localStorage.getItem(VERIFY_KEY) === 'true') {
       localStorage.removeItem(VERIFY_KEY);
       localStorage.removeItem(TIME_KEY);
     }
 
-    // ===== 滑块验证逻辑 =====
     const captchaTrack = document.getElementById('captchaTrack');
     const captchaBg = document.getElementById('captchaBg');
     const captchaThumb = document.getElementById('captchaThumb');
@@ -300,17 +316,11 @@
     let isDragging = false;
     let currentX = 0;
     const TRACK_PADDING = 6;
-    const thumbWidth = 48;
-    let trackWidth = 0;
+    const thumbWidth = 44;
 
     function setMessage(text, type) {
       messageBox.textContent = text;
       messageBox.className = 'message-box ' + type;
-    }
-
-    function clearMessage() {
-      messageBox.textContent = '';
-      messageBox.className = 'message-box';
     }
 
     function resetCaptcha() {
@@ -325,17 +335,12 @@
 
     function initCaptcha() {
       resetCaptcha();
-      const rect = captchaTrack.getBoundingClientRect();
-      trackWidth = rect.width - thumbWidth - TRACK_PADDING * 2;
     }
 
     function onStart(e) {
       e.preventDefault();
       if (captchaResolved) return;
       isDragging = true;
-      const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-      const rect = captchaTrack.getBoundingClientRect();
-      const startX = clientX - rect.left - thumbWidth / 2;
       captchaTrack.style.cursor = 'grabbing';
     }
 

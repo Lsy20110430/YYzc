@@ -15,10 +15,9 @@
         @media (min-width: 768px) { html { font-size: 16px; } }
 
         body {
-            background: #1a1625 url("https://pic1.imgdb.cn/item/69622b91bec004ac7e59a4da.png") no-repeat center center fixed;
+            background: #e8e6ed url("https://picui.ogmua.cn/s1/2026/07/31/6a6c81f424ff0.webp") no-repeat center center fixed;
             background-size: cover;
             font-family: "Microsoft YaHei", "Heiti SC", "Segoe UI", system-ui, sans-serif;
-            color: #eae6f2;
             padding: 30px 0;
             min-height: 100vh;
         }
@@ -31,18 +30,28 @@
         }
 
         .glass-block {
-            background: rgba(30, 26, 42, 0.65);
-            backdrop-filter: blur(16px);
-            border-radius: 32px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: saturate(150%);
+            -webkit-backdrop-filter: saturate(150%);
+            border-radius: 48px;
             padding: 2rem 1.8rem;
-            border: 2px solid rgba(250, 204, 212, 0.45);
-            box-shadow: 0 12px 28px rgba(255, 138, 174, 0.15);
-            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 
+                0 40px 80px -30px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
         }
 
         .glass-block:hover {
-            border-color: rgba(255, 138, 174, 0.7);
-            box-shadow: 0 16px 32px rgba(255, 138, 174, 0.25);
+            background: rgba(255, 255, 255, 0.10);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 
+                0 50px 100px -30px rgba(0, 0, 0, 0.06),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.12),
+                0 0 0 1px rgba(255, 255, 255, 0.08);
         }
 
         .back-bar {
@@ -53,31 +62,35 @@
         }
 
         .back-btn {
-            background: rgba(255, 138, 174, 0.2);
-            border: 2px solid rgba(255, 138, 174, 0.5);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 40px;
-            color: #ff8aae;
+            color: #000000;
             padding: 0.4rem 1.2rem;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
         }
 
         .back-btn:hover {
-            background: rgba(255, 138, 174, 0.35);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.10);
+            color: #000000;
             transform: translateX(-3px);
         }
 
         .section-title {
-            font-size: 1.7rem;
-            font-weight: 700;
-            color: #ff8aae;
+            color: rgba(255, 255, 255, 0.90);
+            font-size: 1.6rem;
+            font-weight: 200;
+            letter-spacing: 1px;
             margin-bottom: 1.2rem;
             padding-left: 0.8rem;
-            border-left: 5px solid #ff8aae;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            border-left: 2px solid rgba(255, 255, 255, 0.12);
+            text-shadow: 0 2px 40px rgba(0, 0, 0, 0.02);
         }
 
         .flex-between {
@@ -92,25 +105,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.8rem 0;
-            border-bottom: 1px dashed rgba(255,200,210,0.4);
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.04);
         }
 
         .status-item:last-child {
             border-bottom: none;
         }
 
-        .item-value {
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            font-weight: 600;
+        .status-item span:first-child {
+            color: #000000;
         }
 
-        .normal { background: #2e7d64; color: #e0ffe8; }
-        .redirect { background: #3b6e9e; color: #fff; }
-        .client-err { background: #b9772e; color: #fff0d0; }
-        .server-err { background: #b33b3b; color: #ffe0e0; }
-        .loading { background: #6b5f7e; color: #f0e6ff; }
+        .item-value {
+            padding: 0.15rem 0.8rem;
+            border-radius: 30px;
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        .normal { background: rgba(255, 255, 255, 0.06); color: #000000; }
+        .redirect { background: rgba(255, 255, 255, 0.04); color: #000000; }
+        .client-err { background: rgba(255, 255, 255, 0.03); color: #000000; }
+        .server-err { background: rgba(255, 255, 255, 0.02); color: #000000; }
+        .loading { background: rgba(255, 255, 255, 0.02); color: rgba(0,0,0,0.30); }
 
         .btn-group {
             display: flex;
@@ -120,15 +138,18 @@
         }
 
         .cute-btn {
-            background: linear-gradient(135deg, #ff8aae 0%, #c89eff 100%);
-            color: white;
-            padding: 0.7rem 1.5rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 40px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(255, 138, 174, 0.4);
-            border: none;
+            color: #000000;
+            padding: 0.7rem 1.5rem;
+            font-weight: 300;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.02),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
             cursor: pointer;
             display: inline-block;
             text-decoration: none;
@@ -136,47 +157,59 @@
         }
 
         .cute-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.10);
+            color: #000000;
             transform: translateY(-2px);
-            background: linear-gradient(135deg, #e85d75, #a875ff);
-            box-shadow: 0 8px 20px rgba(232, 93, 117, 0.6);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.25);
         }
 
         .cute-btn-outline {
             background: transparent;
-            border: 2px solid #ff8aae;
-            color: #ff8aae;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            color: #000000;
             box-shadow: none;
         }
 
         .cute-btn-outline:hover {
-            background: rgba(255,138,174,0.2);
-            color: white;
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.08);
+            color: #000000;
         }
 
         input {
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,200,210,0.6);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 40px;
+            color: #000000;
             padding: 0.7rem 1rem;
-            color: white;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 300;
             width: 100%;
             outline: none;
-            transition: 0.2s;
+            transition: 0.3s;
             flex: 2;
             min-width: 150px;
         }
 
         input:focus {
-            border-color: #ff8aae;
-            background: rgba(30,20,45,0.7);
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        input::placeholder {
+            color: rgba(0, 0, 0, 0.20);
+            font-weight: 200;
         }
 
         .log-box {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.02);
             border-radius: 20px;
+            color: #000000;
             padding: 0.8rem;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
+            font-weight: 200;
             margin-top: 1rem;
             max-height: 120px;
             overflow-y: auto;
@@ -185,15 +218,15 @@
 
         .log-box div {
             padding: 2px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.02);
         }
 
         .loading-spinner {
             display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255,138,174,0.3);
-            border-top-color: #ff8aae;
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid rgba(0, 0, 0, 0.06);
+            border-top-color: #000000;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             vertical-align: middle;
@@ -203,33 +236,51 @@
         @keyframes spin { to { transform: rotate(360deg); } }
 
         .tooltip-trigger {
+            color: #000000;
+            font-size: 0.65rem;
+            font-weight: 200;
             cursor: pointer;
             text-decoration: underline;
-            color: #a89bb8;
-            font-size: 0.7rem;
+            transition: color 0.3s;
+        }
+
+        .tooltip-trigger:hover {
+            color: #000000;
         }
 
         .tooltip-popup {
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.02);
             border-radius: 20px;
             padding: 10px;
             margin-top: 8px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
+            font-weight: 200;
+        }
+
+        .tooltip-popup strong {
+            color: #000000;
+            font-weight: 300;
+        }
+
+        .tooltip-popup span {
+            color: #000000;
         }
 
         .hidden { display: none; }
 
         .footer {
+            color: #000000;
+            font-size: 0.6rem;
+            font-weight: 200;
+            letter-spacing: 1px;
             text-align: center;
-            font-size: 0.7rem;
-            opacity: 0.8;
             margin-top: 1rem;
-            color: #8a7e9e;
         }
 
         @media (max-width: 640px) {
             .glass-block { padding: 1.5rem; }
-            .section-title { font-size: 1.4rem; }
+            .section-title { font-size: 1.3rem; }
             #mainContent { padding: 0 12px; }
         }
     </style>
@@ -240,14 +291,14 @@
     <div class="glass-block">
         <div class="back-bar">
             <a href="home.html" class="back-btn">← 返回菜单</a>
-            <span style="color:#cdc2e6; font-size:0.9rem;">📡 服务器检测</span>
+            <span style="color:#000000; font-size:0.9rem;">📡 服务器检测</span>
         </div>
 
         <div class="section-title">📡 网站状态监控</div>
 
         <div class="flex-between">
-            <span>监测目标：</span>
-            <strong id="currentMonitorTarget" style="color:#ff8aae;">未设置</strong>
+            <span style="color:#000000;">监测目标：</span>
+            <strong id="currentMonitorTarget" style="color:#000000; font-weight:300;">未设置</strong>
         </div>
 
         <div class="status-item">
@@ -277,12 +328,12 @@
             <div>就绪，请设置目标开始监控~</div>
         </div>
 
-        <div style="font-size:0.7rem; text-align:right; margin-top:8px;">
+        <div style="font-size:0.65rem; text-align:right; margin-top:8px;">
             <span class="tooltip-trigger" id="statusTooltipTrigger">♡ 状态码说明 ♡</span>
         </div>
         <div id="statusCodePopup" class="tooltip-popup hidden">
             <strong>2xx成功 · 3xx重定向 · 4xx客户端错 · 5xx服务端错</strong><br>
-            200 OK · 301 永久重定向 · 404 未找到 · 500 服务器错误等
+            <span>200 OK · 301 永久重定向 · 404 未找到 · 500 服务器错误等</span>
         </div>
     </div>
 
@@ -315,7 +366,6 @@
         document.getElementById('mainContent').style.display = 'block';
     })();
 
-    // ========= 网站状态监控模块 =========
     let currentTarget = '';
     let autoRefreshTimer = null;
     const logBox = document.getElementById('monitorLog');
