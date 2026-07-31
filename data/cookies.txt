@@ -1,0 +1,36 @@
+🍪 Cookies 说明
+
+本网站使用浏览器本地存储（localStorage）和会话存储（sessionStorage）来优化您的使用体验。
+
+🔹 我们使用什么？
+本网站不使用传统的 Cookies（即不通过 HTTP 头设置 Cookie）。
+我们使用 localStorage 和 sessionStorage 存储以下信息：
+
+• yunyao_verified —— 人机验证状态（24小时有效）
+• yunyao_verify_time —— 验证时间戳
+• yunyao_agreement_accepted —— 用户协议确认状态（永久有效）
+• yunyao_announce_time —— 公告弹窗最后显示时间（2小时间隔）
+• yunyao_security_time —— 安全提示弹窗最后显示时间（2小时间隔）
+• announcement_shown —— 会话内公告是否已显示
+• security_tip_shown —— 会话内安全提示是否已显示
+
+🔹 这些数据用来做什么？
+• 避免您每次访问都重复进行人机验证
+• 记住您已同意用户协议，不再重复弹出
+• 控制公告和提示弹窗的显示频率
+• 提升您的使用体验
+
+🔹 数据保存在哪里？
+所有数据仅保存在您的浏览器中，不会上传到任何服务器。
+您可以通过浏览器设置随时清除这些数据。
+
+🔹 如何清除？
+• Chrome / Edge：设置 → 隐私和安全 → 清除浏览数据
+• Firefox：设置 → 隐私与安全 → 清除数据
+• Safari：偏好设置 → 隐私 → 管理网站数据
+
+🔹 联系我们
+如有任何疑问，请联系：
+📧 ruinwisp@outlook.com
+
+最后更新：2026年8月1日
