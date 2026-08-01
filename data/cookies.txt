@@ -13,6 +13,7 @@
 • yunyao_security_time —— 安全提示弹窗最后显示时间（2小时间隔）
 • announcement_shown —— 会话内公告是否已显示
 • security_tip_shown —— 会话内安全提示是否已显示
+• id_gen_session —— 身份证补齐功能会话标识（临时存储）
 
 🔹 这些数据用来做什么？
 • 避免您每次访问都重复进行人机验证
