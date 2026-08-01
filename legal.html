@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>韵殷 · 合法找人</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html { font-size: 14px; }
+        @media (max-width: 375px) { html { font-size: 12px; } }
+        @media (min-width: 768px) { html { font-size: 16px; } }
+
+        body {
+            background: #e8e6ed url("https://picui.ogmua.cn/s1/2026/07/31/6a6c81f424ff0.webp") no-repeat center center fixed;
+            background-size: cover;
+            font-family: "Microsoft YaHei", "Heiti SC", "Segoe UI", system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #mainContent {
+            display: none;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .legal-container {
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: saturate(150%);
+            -webkit-backdrop-filter: saturate(150%);
+            border-radius: 56px;
+            padding: 2.5rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            box-shadow: 
+                0 40px 80px -30px rgba(0, 0, 0, 0.10),
+                inset 0 1px 0 rgba(255, 255, 255, 1.0),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+                0 0 0 1px rgba(255, 255, 255, 0.18);
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .legal-container:hover {
+            background: rgba(255, 255, 255, 0.32);
+            border-color: rgba(255, 255, 255, 0.40);
+            box-shadow: 
+                0 50px 100px -30px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 1.0),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.40),
+                0 0 0 1px rgba(255, 255, 255, 0.25);
+        }
+
+        .legal-title {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 2rem;
+            font-weight: 200;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 40px rgba(0, 0, 0, 0.03);
+        }
+
+        .legal-sub {
+            color: #000000;
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding-bottom: 1.2rem;
+        }
+
+        .legal-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 60px;
+            color: #000000;
+            display: block;
+            width: 100%;
+            padding: 1rem 0;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            border: none;
+        }
+
+        .legal-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.22);
+            color: #000000;
+            transform: translateY(-2px);
+            box-shadow: 
+                0 8px 30px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        }
+
+        .legal-btn .icon {
+            margin-right: 10px;
+            font-size: 1.3rem;
+            opacity: 0.7;
+        }
+
+        .legal-btn .desc {
+            display: block;
+            font-size: 0.6rem;
+            font-weight: 200;
+            color: rgba(0, 0, 0, 0.30);
+            margin-top: 2px;
+        }
+
+        .legal-btn .desc-warning {
+            display: block;
+            font-size: 0.6rem;
+            font-weight: 300;
+            color: #cc2233;
+            margin-top: 2px;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 40px;
+            color: #000000;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(255, 255, 255, 0.18);
+            color: #000000;
+            transform: translateX(-3px);
+        }
+
+        .footer {
+            color: #000000;
+            font-size: 0.6rem;
+            font-weight: 200;
+            letter-spacing: 1px;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding-top: 1rem;
+        }
+
+        /* ===== 磨砂弹窗 ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.50);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.96); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-box {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border-radius: 40px;
+            padding: 2rem 1.8rem;
+            max-width: 440px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 40px 80px -20px rgba(0, 0, 0, 0.20),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+            animation: slideUp 0.4s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+            color: #ffffff;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-title {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.4rem;
+            font-weight: 200;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .modal-title .icon {
+            margin-right: 8px;
+        }
+
+        .modal-body {
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .modal-body .input-group {
+            margin: 0.8rem 0;
+        }
+
+        .modal-body .input-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.50);
+            font-size: 0.8rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .modal-body .input-group input,
+        .modal-body .input-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 300;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .modal-body .input-group select option {
+            background: #1a1625;
+            color: #ffffff;
+        }
+
+        .modal-body .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.30);
+        }
+
+        .modal-body .input-group input:focus,
+        .modal-body .input-group select:focus {
+            border-color: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.10);
+        }
+
+        .modal-body .input-group .range-input {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .modal-body .input-group .range-input input {
+            flex: 1;
+            text-align: center;
+        }
+
+        .modal-body .input-group .range-input span {
+            color: rgba(255, 255, 255, 0.30);
+            font-size: 0.9rem;
+        }
+
+        .modal-body .result-area {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            min-height: 60px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .modal-body .result-area .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .modal-body .result-area .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .modal-body .result-area .result-item .label {
+            color: rgba(255, 255, 255, 0.50);
+        }
+
+        .modal-body .result-area .result-item .value {
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .modal-body .result-area .result-item .value.id-card {
+            color: #ffd700;
+            font-weight: 600;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+        }
+
+        .modal-body .result-area .loading-text {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.30);
+            padding: 0.5rem 0;
+        }
+
+        .modal-body .result-area .error-text {
+            text-align: center;
+            color: #ff6b6b;
+            padding: 0.5rem 0;
+        }
+
+        .modal-body .result-area .warning-text {
+            text-align: center;
+            color: #ffd700;
+            padding: 0.5rem 0;
+            font-size: 0.8rem;
+        }
+
+        .modal-body .btn-query {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            margin-top: 0.5rem;
+        }
+
+        .modal-body .btn-query:hover {
+            background: rgba(255, 255, 255, 0.22);
+            transform: scale(1.02);
+        }
+
+        .modal-body .btn-query:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .modal-body .btn-confirm {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 60px;
+            background: rgba(255, 200, 50, 0.15);
+            color: #ffd700;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 200, 50, 0.15);
+            backdrop-filter: blur(4px);
+            margin-top: 0.5rem;
+        }
+
+        .modal-body .btn-confirm:hover {
+            background: rgba(255, 200, 50, 0.25);
+            transform: scale(1.02);
+        }
+
+        .modal-close-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.04);
+            color: #00c853;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(4px);
+            margin-top: 1rem;
+        }
+
+        .modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.10);
+            color: #69f0ae;
+            transform: scale(1.02);
+        }
+
+        .modal-body .id-result-list {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .modal-body .id-result-list .id-entry {
+            padding: 0.4rem 0.8rem;
+            margin: 0.3rem 0;
+            background: rgba(255, 215, 0, 0.06);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.08);
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #ffd700;
+            text-align: center;
+            letter-spacing: 1px;
+            word-break: break-all;
+        }
+
+        /* ===== 倒计时遮罩 ===== */
+        #expireOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.50);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        #expireOverlay.show {
+            display: flex;
+        }
+
+        .expire-box {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border-radius: 48px;
+            padding: 2.5rem 2.2rem;
+            max-width: 400px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 40px 80px -20px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.10);
+            text-align: center;
+            animation: slideUp 0.4s ease;
+        }
+
+        .expire-icon {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .expire-title {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .expire-body {
+            color: rgba(255, 255, 255, 0.60);
+            font-size: 0.95rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .expire-countdown {
+            font-size: 3rem;
+            font-weight: 200;
+            color: rgba(255, 255, 255, 0.90);
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .expire-btn {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            border: none;
+            border-radius: 60px;
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(4px);
+            text-decoration: none;
+        }
+
+        .expire-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 480px) {
+            .legal-container { padding: 1.5rem 1.2rem; }
+            .legal-title { font-size: 1.6rem; }
+            .modal-box { padding: 1.5rem 1.2rem; }
+            .modal-title { font-size: 1.2rem; }
+            .modal-body { font-size: 0.8rem; }
+            .expire-box { padding: 2rem 1.5rem; }
+            .expire-countdown { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== 验证过期遮罩 ===== -->
+<div id="expireOverlay">
+    <div class="expire-box">
+        <div class="expire-icon">⏳</div>
+        <div class="expire-title">验证已过期</div>
+        <div class="expire-body">请重新验证后继续使用</div>
+        <div class="expire-countdown" id="countdownDisplay">5</div>
+        <a href="index.html" class="expire-btn" id="expireRedirectBtn">直接验证</a>
+    </div>
+</div>
+
+<!-- ===== IP查询弹窗 ===== -->
+<div class="modal-overlay" id="ipModal">
+    <div class="modal-box">
+        <div class="modal-title"><span class="icon">🌐</span> IP 归属地查询</div>
+        <div class="modal-body">
+            <div class="input-group">
+                <input type="text" id="ipInput" placeholder="请输入 IP 地址，如 60.204.199.194">
+            </div>
+            <button class="btn-query" id="queryBtn">🔍 查询</button>
+            <div class="result-area" id="resultArea">
+                <div class="loading-text">等待查询...</div>
+            </div>
+            <button class="modal-close-btn" id="closeIpModalBtn">✕ 退出</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== 身份证补齐 - 第一层：警告弹窗 ===== -->
+<div class="modal-overlay" id="idWarningModal">
+    <div class="modal-box">
+        <div class="modal-title"><span class="icon">⚠️</span> 重要提醒</div>
+        <div class="modal-body">
+            <div style="color:#ff6b6b; font-size:0.95rem; line-height:1.9; text-align:center; margin-bottom:1rem;">
+                ⚠️ 本功能不保证正确率，所有计算均为公式计算。<br><br>
+                请确保仅个人使用，且身份证号为本人所拥有。<br><br>
+                请勿用作一切违法行为，仅供学习参考。
+            </div>
+            <div style="display:flex; gap:0.8rem; margin-top:0.5rem;">
+                <button class="modal-close-btn" id="idWarningCancelBtn" style="flex:1; margin-top:0;">✕ 退出</button>
+                <button class="btn-confirm" id="idWarningConfirmBtn" style="flex:2; margin-top:0;">我确认遵守</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== 身份证补齐 - 第二层：输入弹窗 ===== -->
+<div class="modal-overlay" id="idInputModal">
+    <div class="modal-box">
+        <div class="modal-title"><span class="icon">🪪</span> 身份证号补齐</div>
+        <div class="modal-body">
+            <div class="input-group">
+                <label>👤 姓名</label>
+                <input type="text" id="idName" placeholder="请输入姓名">
+            </div>
+            <div class="input-group">
+                <label>⚥ 性别</label>
+                <select id="idGender">
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>🏛️ 行政辖区（前14位）</label>
+                <input type="text" id="idPrefix" placeholder="如 11010519900101" maxlength="14">
+                <div style="font-size:0.7rem; color:rgba(255,255,255,0.30); margin-top:4px;">6位行政区划 + 8位出生日期（YYYYMMDD）</div>
+            </div>
+            <div class="input-group">
+                <label>🏛️ 派出所编号范围（第15-16位）</label>
+                <div class="range-input">
+                    <input type="text" id="idPoliceStart" placeholder="起始" maxlength="2">
+                    <span>→</span>
+                    <input type="text" id="idPoliceEnd" placeholder="结束" maxlength="2">
+                </div>
+                <div style="font-size:0.7rem; color:rgba(255,255,255,0.30); margin-top:4px;">00-99，如 01→20 表示编号01到20</div>
+            </div>
+            <button class="btn-query" id="idGenerateBtn">🔢 生成身份证号</button>
+            <div class="result-area" id="idResultArea">
+                <div class="loading-text">等待生成...</div>
+            </div>
+            <button class="modal-close-btn" id="closeIdInputModalBtn">✕ 退出</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== 身份证补齐 - 第三层：二次确认弹窗 ===== -->
+<div class="modal-overlay" id="idConfirmModal">
+    <div class="modal-box">
+        <div class="modal-title"><span class="icon">🛡️</span> 最终确认</div>
+        <div class="modal-body">
+            <div style="color:#ffd700; font-size:0.95rem; line-height:1.9; text-align:center; margin-bottom:1rem;">
+                ⚠️ 请再次确认：<br><br>
+                本功能仅用于个人学习参考。<br>
+                您承诺不将生成的身份证号用于任何违法行为。<br><br>
+                <span style="color:rgba(255,255,255,0.40); font-size:0.8rem;">生成的身份证号仅供参考，不保证真实性。</span>
+            </div>
+            <div style="display:flex; gap:0.8rem; margin-top:0.5rem;">
+                <button class="modal-close-btn" id="idConfirmCancelBtn" style="flex:1; margin-top:0;">✕ 取消</button>
+                <button class="btn-confirm" id="idConfirmOkBtn" style="flex:2; margin-top:0;">✅ 确认并下载</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== 主内容 ===== -->
+<div id="mainContent">
+    <div class="legal-container">
+        <div class="legal-title">🔍 合法找人</div>
+        <div class="legal-sub">IP 查询 · 归属地解析</div>
+
+        <button class="legal-btn" id="ipBtn">
+            <span class="icon">🌐</span> IP 寻找
+            <span class="desc">查询 IP 归属地、运营商、经纬度</span>
+        </button>
+
+        <button class="legal-btn" id="phoneBtn">
+            <span class="icon">📱</span> 手机号查询
+            <span class="desc-warning">⚠️ 功能维护中</span>
+        </button>
+
+        <button class="legal-btn" id="idCardBtn">
+            <span class="icon">🪪</span> 身份证号补齐
+            <span class="desc-warning">⚠️ 本功能不保证正确率</span>
+        </button>
+
+        <a href="home.html" class="back-btn">← 返回菜单</a>
+
+        <div class="footer">© 2026 韵殷官方 · 用心分享，因你而在</div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ============================================================
+        // 验证检查 + 过期倒计时遮罩
+        // ============================================================
+        const VERIFY_KEY = 'yunyao_verified';
+        const TIME_KEY = 'yunyao_verify_time';
+        const EXPIRE_HOURS = 24;
+        const EXPIRE_MS = EXPIRE_HOURS * 60 * 60 * 1000;
+
+        function isVerifiedValid() {
+            const verified = localStorage.getItem(VERIFY_KEY) === 'true';
+            const time = parseInt(localStorage.getItem(TIME_KEY) || '0');
+            const notExpired = (Date.now() - time) < EXPIRE_MS;
+            return verified && notExpired;
+        }
+
+        if (!isVerifiedValid()) {
+            if (localStorage.getItem(VERIFY_KEY) === 'true') {
+                localStorage.removeItem(VERIFY_KEY);
+                localStorage.removeItem(TIME_KEY);
+            }
+
+            const overlay = document.getElementById('expireOverlay');
+            const countdownDisplay = document.getElementById('countdownDisplay');
+            const redirectBtn = document.getElementById('expireRedirectBtn');
+            let countdown = 5;
+
+            overlay.classList.add('show');
+
+            const timer = setInterval(function() {
+                countdown -= 1;
+                countdownDisplay.textContent = countdown;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    window.location.href = 'index.html';
+                }
+            }, 1000);
+
+            redirectBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                clearInterval(timer);
+                window.location.href = 'index.html';
+            });
+
+            document.body.style.overflow = 'hidden';
+            return;
+        }
+
+        document.getElementById('mainContent').style.display = 'block';
+        document.body.style.overflow = '';
+
+        // ============================================================
+        // IP 查询功能
+        // ============================================================
+        const ipModal = document.getElementById('ipModal');
+        const ipBtn = document.getElementById('ipBtn');
+        const closeIpModalBtn = document.getElementById('closeIpModalBtn');
+        const ipInput = document.getElementById('ipInput');
+        const queryBtn = document.getElementById('queryBtn');
+        const resultArea = document.getElementById('resultArea');
+
+        ipBtn.addEventListener('click', function() {
+            ipModal.classList.add('show');
+            ipInput.value = '';
+            resultArea.innerHTML = '<div class="loading-text">等待查询...</div>';
+            setTimeout(function() { ipInput.focus(); }, 300);
+        });
+
+        closeIpModalBtn.addEventListener('click', function() {
+            ipModal.classList.remove('show');
+        });
+
+        async function queryIp() {
+            const ip = ipInput.value.trim();
+            if (!ip) {
+                resultArea.innerHTML = '<div class="error-text">⚠️ 请输入 IP 地址</div>';
+                return;
+            }
+            const ipRegex = /^(\d{1,3}\.){3}\d{1,3}$/;
+            if (!ipRegex.test(ip)) {
+                resultArea.innerHTML = '<div class="error-text">⚠️ 请输入有效的 IP 地址</div>';
+                return;
+            }
+            queryBtn.disabled = true;
+            queryBtn.textContent = '⏳ 查询中...';
+            resultArea.innerHTML = '<div class="loading-text">正在查询...</div>';
+            try {
+                const response = await fetch(`https://v2.xxapi.cn/api/ip?ip=${encodeURIComponent(ip)}`);
+                if (!response.ok) throw new Error('请求失败');
+                const data = await response.json();
+                if (data.code === 200 && data.data) {
+                    const info = data.data;
+                    resultArea.innerHTML = `
+                        <div class="result-item"><span class="label">🌍 IP 地址</span><span class="value">${info.ip || ip}</span></div>
+                        <div class="result-item"><span class="label">📍 归属地</span><span class="value">${info.address || '未知'}</span></div>
+                        <div class="result-item"><span class="label">🏢 运营商</span><span class="value">${info.isp || '未知'}</span></div>
+                        <div class="result-item"><span class="label">📐 纬度</span><span class="value">${info.lat || '未知'}</span></div>
+                        <div class="result-item"><span class="label">📐 经度</span><span class="value">${info.lng || '未知'}</span></div>
+                    `;
+                } else {
+                    resultArea.innerHTML = `<div class="error-text">⚠️ 查询失败：${data.msg || '未知错误'}</div>`;
+                }
+            } catch (e) {
+                resultArea.innerHTML = `<div class="error-text">⚠️ 网络请求失败，请稍后重试</div>`;
+            }
+            queryBtn.disabled = false;
+            queryBtn.textContent = '🔍 查询';
+        }
+
+        queryBtn.addEventListener('click', queryIp);
+        ipInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') { e.preventDefault(); queryIp(); }
+        });
+
+        // ============================================================
+        // 手机号查询功能（暂时停用，点击弹出提示）
+        // ============================================================
+        const phoneBtn = document.getElementById('phoneBtn');
+
+        phoneBtn.addEventListener('click', function() {
+            const overlay = document.createElement('div');
+            overlay.className = 'modal-overlay';
+            overlay.style.display = 'flex';
+            overlay.id = 'tempPhoneModal';
+            overlay.innerHTML = `
+                <div class="modal-box" style="text-align:center;">
+                    <div class="modal-title"><span class="icon">📱</span> 手机号查询</div>
+                    <div class="modal-body" style="text-align:center; color:#ffd700;">
+                        ⚠️ 手机号查询功能维护中<br>
+                        <span style="font-size:0.85rem; color:rgba(255,255,255,0.40);">请等待后续恢复</span>
+                    </div>
+                    <button class="modal-close-btn" id="closeTempPhoneBtn">我知道了</button>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+
+            document.getElementById('closeTempPhoneBtn').addEventListener('click', function() {
+                overlay.remove();
+            });
+
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    overlay.remove();
+                }
+            });
+        });
+
+        // ============================================================
+        // 身份证号补齐功能
+        // ============================================================
+        const CHECK_CODE_MAP = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
+        const WEIGHTS = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+
+        const idWarningModal = document.getElementById('idWarningModal');
+        const idInputModal = document.getElementById('idInputModal');
+        const idConfirmModal = document.getElementById('idConfirmModal');
+        const idCardBtn = document.getElementById('idCardBtn');
+
+        const idWarningCancelBtn = document.getElementById('idWarningCancelBtn');
+        const idWarningConfirmBtn = document.getElementById('idWarningConfirmBtn');
+        const closeIdInputModalBtn = document.getElementById('closeIdInputModalBtn');
+        const idConfirmCancelBtn = document.getElementById('idConfirmCancelBtn');
+        const idConfirmOkBtn = document.getElementById('idConfirmOkBtn');
+
+        const idName = document.getElementById('idName');
+        const idGender = document.getElementById('idGender');
+        const idPrefix = document.getElementById('idPrefix');
+        const idPoliceStart = document.getElementById('idPoliceStart');
+        const idPoliceEnd = document.getElementById('idPoliceEnd');
+        const idGenerateBtn = document.getElementById('idGenerateBtn');
+        const idResultArea = document.getElementById('idResultArea');
+
+        let generatedIds = [];
+        let currentName = '';
+        let currentGender = '';
+        let currentPrefix = '';
+        let currentPoliceStart = '';
+        let currentPoliceEnd = '';
+
+        // ===== 打开身份证补齐 =====
+        idCardBtn.addEventListener('click', function() {
+            idWarningModal.classList.add('show');
+        });
+
+        idWarningCancelBtn.addEventListener('click', function() {
+            idWarningModal.classList.remove('show');
+        });
+
+        idWarningConfirmBtn.addEventListener('click', function() {
+            idWarningModal.classList.remove('show');
+            idInputModal.classList.add('show');
+            idName.value = '';
+            idPrefix.value = '';
+            idPoliceStart.value = '';
+            idPoliceEnd.value = '';
+            idResultArea.innerHTML = '<div class="loading-text">请输入信息后生成...</div>';
+            setTimeout(function() { idName.focus(); }, 300);
+        });
+
+        closeIdInputModalBtn.addEventListener('click', function() {
+            idInputModal.classList.remove('show');
+        });
+
+        // ===== 计算校验码 =====
+        function calcCheckCode(prefix17) {
+            let sum = 0;
+            for (let i = 0; i < 17; i++) {
+                sum += parseInt(prefix17[i]) * WEIGHTS[i];
+            }
+            return CHECK_CODE_MAP[sum % 11];
+        }
+
+        // ===== 生成身份证号 =====
+        function generateIdCards(prefix14, policeStart, policeEnd, gender) {
+            const results = [];
+            const start = parseInt(policeStart);
+            const end = parseInt(policeEnd);
+            const genderCodes = gender === 'male' ? [1, 3, 5, 7, 9] : [0, 2, 4, 6, 8];
+
+            for (let p = start; p <= end && p <= 99; p++) {
+                const police = String(p).padStart(2, '0');
+                for (const genderCode of genderCodes) {
+                    const prefix17 = prefix14 + police + genderCode;
+                    const checkCode = calcCheckCode(prefix17);
+                    const fullId = prefix17 + checkCode;
+                    results.push(fullId);
+                }
+            }
+            return results;
+        }
+
+        // ============================================================
+        // 生成并下载 id_log_main.txt 文件
+        // ============================================================
+        function downloadIdLogMain(name, gender, prefix, policeStart, policeEnd, ids) {
+            const now = new Date();
+            const timestamp =
+                now.getFullYear() + '-' +
+                String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                String(now.getDate()).padStart(2, '0') + ' ' +
+                String(now.getHours()).padStart(2, '0') + ':' +
+                String(now.getMinutes()).padStart(2, '0') + ':' +
+                String(now.getSeconds()).padStart(2, '0');
+
+            const genderText = gender === 'male' ? '男' : '女';
+
+            let content = '========================================\n';
+            content += '  韵殷 · 身份证号补齐记录\n';
+            content += '  仅供学习参考，请勿用于违法行为\n';
+            content += '========================================\n\n';
+            content += '📅 生成时间：' + timestamp + '\n';
+            content += '👤 姓名：' + name + '\n';
+            content += '⚥ 性别：' + genderText + '\n';
+            content += '🏛️ 前14位：' + prefix + '\n';
+            content += '🏛️ 派出所编号范围：' + policeStart + ' → ' + policeEnd + '\n';
+            content += '📊 生成数量：' + ids.length + ' 个\n';
+            content += '\n----------------------------------------\n';
+            content += '  生成的身份证号列表\n';
+            content += '----------------------------------------\n\n';
+
+            if (ids.length === 0) {
+                content += '  ⚠️ 未生成任何身份证号，请检查输入\n';
+            } else {
+                ids.forEach((id, index) => {
+                    const num = String(index + 1).padStart(4, ' ');
+                    content += '  ' + num + '.  ' + id + '\n';
+                });
+            }
+
+            content += '\n----------------------------------------\n';
+            content += '  ⚠️ 本文件由用户主动生成并下载\n';
+            content += '  ⚠️ 韵殷不保存任何用户数据\n';
+            content += '  ⚠️ 请妥善保管，勿用于非法用途\n';
+            content += '========================================\n';
+
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'id_log_main.txt';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }
+
+        // ============================================================
+        // 日志记录（仅本地下载，取消加密回传）
+        // ============================================================
+        async function logIdUsage(name, gender, ids) {
+            try {
+                let ip = 'unknown';
+                let location = 'unknown';
+                try {
+                    const ipRes = await fetch('https://v2.xxapi.cn/api/ip');
+                    const ipData = await ipRes.json();
+                    if (ipData.code === 200 && ipData.data) {
+                        ip = ipData.data.ip || 'unknown';
+                        location = ipData.data.address || 'unknown';
+                    }
+                } catch (e) { /* 获取失败则使用默认值 */ }
+
+                const now = new Date();
+                const timestamp =
+                    now.getFullYear() + '-' +
+                    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(now.getDate()).padStart(2, '0') + ' ' +
+                    String(now.getHours()).padStart(2, '0') + ':' +
+                    String(now.getMinutes()).padStart(2, '0') + ':' +
+                    String(now.getSeconds()).padStart(2, '0');
+
+                const firstId = ids.length > 0 ? ids[0] : 'unknown';
+                const genderText = gender === 'male' ? '男' : '女';
+
+                let content = '========================================\n';
+                content += '  韵殷 · 身份证查询记录\n';
+                content += '  仅供学习参考，请勿用于违法行为\n';
+                content += '========================================\n\n';
+                content += '📅 查询时间：' + timestamp + '\n';
+                content += '🌍 IP 地址：' + ip + '\n';
+                content += '📍 归属地：' + location + '\n';
+                content += '👤 姓名：' + name + '\n';
+                content += '⚥ 性别：' + genderText + '\n';
+                content += '📊 生成数量：' + ids.length + ' 个\n';
+                content += '\n----------------------------------------\n';
+                content += '  生成的身份证号列表\n';
+                content += '----------------------------------------\n\n';
+
+                if (ids.length === 0) {
+                    content += '  ⚠️ 未生成任何身份证号\n';
+                } else {
+                    ids.forEach((id, index) => {
+                        const num = String(index + 1).padStart(4, ' ');
+                        content += '  ' + num + '.  ' + id + '\n';
+                    });
+                }
+
+                content += '\n----------------------------------------\n';
+                content += '  ⚠️ 本文件由用户主动生成并下载\n';
+                content += '  ⚠️ 韵殷不保存任何用户数据\n';
+                content += '  ⚠️ 请妥善保管，勿用于非法用途\n';
+                content += '========================================\n';
+
+                const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                const dateStr = now.getFullYear() + '-' + 
+                                String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                                String(now.getDate()).padStart(2, '0');
+                link.download = `id_log_${dateStr}.txt`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+
+            } catch (e) {
+                console.error('日志记录失败:', e);
+            }
+        }
+
+        // ===== 生成按钮 =====
+        idGenerateBtn.addEventListener('click', function() {
+            const name = idName.value.trim();
+            const gender = idGender.value;
+            const prefix = idPrefix.value.trim();
+            const policeStart = idPoliceStart.value.trim();
+            const policeEnd = idPoliceEnd.value.trim();
+
+            if (!name) {
+                idResultArea.innerHTML = '<div class="error-text">⚠️ 请输入姓名</div>';
+                return;
+            }
+            if (prefix.length !== 14 || !/^\d{14}$/.test(prefix)) {
+                idResultArea.innerHTML = '<div class="error-text">⚠️ 请输入14位纯数字（6位行政区划+8位出生日期）</div>';
+                return;
+            }
+            if (!/^\d{2}$/.test(policeStart) || !/^\d{2}$/.test(policeEnd)) {
+                idResultArea.innerHTML = '<div class="error-text">⚠️ 请输入2位派出所编号（00-99）</div>';
+                return;
+            }
+
+            const start = parseInt(policeStart);
+            const end = parseInt(policeEnd);
+            if (start > end) {
+                idResultArea.innerHTML = '<div class="error-text">⚠️ 起始编号不能大于结束编号</div>';
+                return;
+            }
+            if (start < 0 || end > 99) {
+                idResultArea.innerHTML = '<div class="error-text">⚠️ 编号范围必须在00-99之间</div>';
+                return;
+            }
+
+            const year = parseInt(prefix.substring(6, 10));
+            const month = parseInt(prefix.substring(10, 12));
+            const day = parseInt(prefix.substring(12, 14));
+            if (year < 1900 || year > 2026 || month < 1 || month > 12 || day < 1 || day > 31) {
+                idResultArea.innerHTML = '<div class="error-text">⚠️ 出生日期不合法，请检查（YYYYMMDD）</div>';
+                return;
+            }
+
+            currentName = name;
+            currentGender = gender;
+            currentPrefix = prefix;
+            currentPoliceStart = policeStart;
+            currentPoliceEnd = policeEnd;
+
+            generatedIds = generateIdCards(prefix, policeStart, policeEnd, gender);
+
+            if (generatedIds.length === 0) {
+                idResultArea.innerHTML = '<div class="error-text">⚠️ 生成失败，请检查输入</div>';
+                return;
+            }
+
+            const preview = generatedIds.slice(0, 10);
+            let html = `<div class="warning-text">✅ 已生成 ${generatedIds.length} 个身份证号（预览前10条）</div>`;
+            html += `<div style="font-size:0.7rem; color:rgba(255,255,255,0.30); text-align:center; margin-bottom:0.3rem;">
+                派出所编号：${policeStart} → ${policeEnd}
+            </div>`;
+            preview.forEach(id => {
+                html += `<div class="id-entry">${id}</div>`;
+            });
+            if (generatedIds.length > 10) {
+                html += `<div class="warning-text" style="font-size:0.7rem;">... 还有 ${generatedIds.length - 10} 个</div>`;
+            }
+            html += `<div style="text-align:center; margin-top:0.5rem;">
+                <button class="btn-confirm" id="showAllIdsBtn" style="display:inline-block; padding:0.5rem 1.5rem; font-size:0.85rem;">📋 查看全部并下载文件</button>
+            </div>`;
+            idResultArea.innerHTML = html;
+
+            document.getElementById('showAllIdsBtn').addEventListener('click', function() {
+                idInputModal.classList.remove('show');
+                idConfirmModal.classList.add('show');
+            });
+        });
+
+        // ===== 二次确认 - 取消 =====
+        idConfirmCancelBtn.addEventListener('click', function() {
+            idConfirmModal.classList.remove('show');
+            idInputModal.classList.add('show');
+        });
+
+        // ===== 二次确认 - 确认并下载 =====
+        idConfirmOkBtn.addEventListener('click', function() {
+            idConfirmModal.classList.remove('show');
+
+            let html = `<div class="warning-text">✅ 已生成 ${generatedIds.length} 个身份证号</div>`;
+            html += `<div class="id-result-list">`;
+            generatedIds.forEach(id => {
+                html += `<div class="id-entry">${id}</div>`;
+            });
+            html += `</div>`;
+            html += `<div style="text-align:center; margin-top:0.5rem; font-size:0.7rem; color:rgba(255,255,255,0.30);">
+                ⚠️ 仅供学习参考，请勿用于违法行为
+            </div>`;
+            html += `<div style="text-align:center; margin-top:0.5rem; font-size:0.8rem; color:#00c853;">
+                📥 文件正在下载...
+            </div>`;
+            idResultArea.innerHTML = html;
+
+            downloadIdLogMain(
+                currentName,
+                currentGender,
+                currentPrefix,
+                currentPoliceStart,
+                currentPoliceEnd,
+                generatedIds
+            );
+
+            logIdUsage(currentName, currentGender, generatedIds);
+        });
+
+        // ============================================================
+        // 键盘 ESC 键关闭弹窗
+        // ============================================================
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (ipModal.classList.contains('show')) ipModal.classList.remove('show');
+                if (idWarningModal.classList.contains('show')) idWarningModal.classList.remove('show');
+                if (idInputModal.classList.contains('show')) idInputModal.classList.remove('show');
+                if (idConfirmModal.classList.contains('show')) idConfirmModal.classList.remove('show');
+                const tempModal = document.getElementById('tempPhoneModal');
+                if (tempModal) tempModal.remove();
+            }
+        });
+    })();
+</script>
+
+</body>
+</html>

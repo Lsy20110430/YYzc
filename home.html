@@ -486,13 +486,25 @@
     </div>
 </div>
 
+<!-- ===== 项目公示弹窗（已废弃，保留以防万一） ===== -->
+<div id="projectModal" class="modal-overlay hidden">
+    <div class="modal-box">
+        <div class="modal-icon">🚧</div>
+        <div class="modal-title">项目公示</div>
+        <div class="modal-body">
+            🔴 该功能正在建设，请等待后续更新汇报
+            <div class="sub-text">预计每季度末发布一期公示</div>
+        </div>
+        <button class="modal-close-btn" id="closeProjectModalBtn">我知道了</button>
+    </div>
+</div>
+
 <!-- ===== 主内容 ===== -->
 <div id="mainContent">
     <div class="menu-container">
         <div class="menu-title">🌸 韵殷功能菜单</div>
         <div class="menu-sub">安全 · 公益 · 合规传播</div>
 
-        <!-- ===== 修改：官网信息 → 关于韵殷 ===== -->
         <a href="info.html" class="menu-btn">
             <span class="icon">🌸</span> 关于韵殷
             <span class="desc">了解我们的故事与理念</span>
@@ -503,12 +515,17 @@
             <span class="desc">实时监控网站可用性</span>
         </a>
 
+        <!-- ===== 合法找人（新增） ===== -->
+        <a href="legal.html" class="menu-btn">
+            <span class="icon">🔍</span> 合法找人
+            <span class="desc">IP地址查询 · 归属地解析</span>
+        </a>
+
         <a href="files.html" class="menu-btn">
             <span class="icon">📂</span> 文件分享
             <span class="desc">浏览所有公益分享文件</span>
         </a>
 
-        <!-- ===== 项目公示按钮（修改后） ===== -->
         <a href="public.html" class="menu-btn project">
             <span class="icon">📊</span> 项目公示
             <span class="desc">查看赞助月榜与捐款去向</span>
@@ -608,16 +625,12 @@
         });
 
         // ============================================================
-        // 3. 项目公示弹窗
+        // 3. 项目公示弹窗（已废弃，保留以防万一）
         // ============================================================
         const projectModal = document.getElementById('projectModal');
         const closeProjectBtn = document.getElementById('closeProjectModalBtn');
-        const projectBtn = document.getElementById('projectBtn');
 
-        projectBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            projectModal.classList.remove('hidden');
-        });
+        // 如果有 projectBtn 的引用需要移除，但这里没有，所以安全
 
         closeProjectBtn.addEventListener('click', function() {
             projectModal.classList.add('hidden');
