@@ -1,8 +1,14 @@
 [
     {
+        "name": "AxManager",
+        "url": "https://release-assets.githubusercontent.com/github-production-release-asset/1039395293/8585c8e6-8262-4ad3-a6e3-10b63cdf1d56?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-08-03T20%3A42%3A45Z&rscd=attachment%3B+filename%3DAxManager_v1.4.8.r349_14800-release_2605242016.apk&rsct=application%2Fvnd.android.package-archive&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-08-03T19%3A42%3A27Z&ske=2026-08-03T20%3A42%3A45Z&sks=b&skv=2018-11-09&sig=EzPdJRiMFkaefsaV6h2cBn8JtTjwzpLxAengvIrqzoY%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc4NTc4NzcxOSwibmJmIjoxNzg1Nzg3NDE5LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.5Lq_dSp7c2zNMab2n1yzvP3LY72drIMTXBQemcSKLTM&response-content-disposition=attachment%3B%20filename%3DAxManager_v1.4.8.r349_14800-release_2605242016.apk&response-content-type=application%2Fvnd.android.package-archive",
+        "size": "20 MB",
+        "date": "2026-08-04"
+    },
+    {
         "name": "推特（X）",
-        "url": "https://m.doyo.cn/app/502833.html",
-        "size": "106.8 MB",
+        "url": "http://m.memuplay.com/tw/download-com.twitter.android.html",
+        "size": "206.8 MB",
         "date": "2026-08-01"
     },
     {
