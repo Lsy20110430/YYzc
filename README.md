@@ -15,6 +15,12 @@ This file shows in Chinese, with the English version below
 该网站可跨域访问 丢包率几乎为0 延迟为100ms-600ms
 之间
 
+加入我们：
+
+TG：@YvaineHub
+
+QQ：713631256
+
 ————Here's the English version————
 
 This project is mainly used to build the Yunyin Public Welfare official website, which serves as a platform for sharing public welfare documents.
@@ -26,3 +32,9 @@ website
 -> https://yunyincz.dpdns.org
 
 The website is accessible across domains with almost zero packet loss and latency between 100ms and 600ms
+
+Join us：
+
+TG：@YvaineHub
+
+QQ：713631256
